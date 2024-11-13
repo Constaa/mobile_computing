@@ -1,1 +1,194 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$calendar-frontend-theme: mat.define-theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      density: (scale: 0,
+      )));
+
+$calendar-frontend-primary-palette: (
+  50: #034875,
+  100: #0662a0,
+  200: #0c7eca,
+  300: #2599e6,
+  400: #3eadf7,
+  500: #64cdec,
+  600: #9bddf1,
+  700: #c3f0fd,
+  800: #dff3f8,
+  900: #ffffff,
+  contrast: (900: #000000,
+    800: #000000,
+    700: #000000,
+    600: #000000,
+    500: #000000,
+    400: #000000,
+    300: #ffffff,
+    200: #ffffff,
+    100: #ffffff,
+    50: #ffffff)
+);
+
+$calendar-frontend-primary-palette-dark: (
+  50: #034875,
+  100: #0662a0,
+  200: #0c7eca,
+  300: #2599e6,
+  400: #3eadf7,
+  500: #64cdec,
+  600: #9bddf1,
+  700: #c3f0fd,
+  800: #dff3f8,
+  900: #ffffff,
+  contrast: (900: #000000,
+    800: #000000,
+    700: #000000,
+    600: #000000,
+    500: #000000,
+    400: #000000,
+    300: #ffffff,
+    200: #ffffff,
+    100: #ffffff,
+    50: #ffffff)
+);
+
+// $calendar-frontend-accent-palette: (
+//   50: #00658d,
+//   100: #007fb0,
+//   200: #009bd5,
+//   300: #00a0dc,
+//   400: #39b6f3,
+//   500: #82cfff,
+//   600: #c6e7ff,
+//   700: #e4f3ff,
+//   800: #f5faff,
+//   900: #ffffff,
+//   contrast: (50: #ffffff,
+//     100: #ffffff,
+//     200: #ffffff,
+//     300: #ffffff,
+//     400: #000000,
+//     500: #000000,
+//     600: #000000,
+//     700: #000000,
+//     800: #000000,
+//     900: #000000)
+// );
+
+$calendar-frontend-accent-palette: (
+  50: #000000,
+  100: #111111,
+  200: #222222,
+  300: #333333,
+  400: #555555,
+  500: #666666,
+  600: #888888,
+  700: #aaaaaa,
+  800: #bbbbbb,
+  900: #ffffff,
+  contrast: (50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #000000,
+    800: #000000,
+    900: #000000)
+);
+
+$calendar-frontend-warn-palette: (
+  50: #806811,
+  100: #8f7517,
+  200: #a88a1b,
+  300: #bd9b16,
+  400: #e0b818,
+  500: #ffcc00,
+  600: #ffe08b,
+  700: #ffefcd,
+  800: #fff8f1,
+  900: #ffffff,
+  contrast: (50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000)
+);
+
+$calendar-frontend-primary: mat.m2-define-palette($calendar-frontend-primary-palette, 50);
+$calendar-frontend-primary-dark: mat.m2-define-palette($calendar-frontend-primary-palette-dark, 50);
+$calendar-frontend-accent: mat.m2-define-palette($calendar-frontend-accent-palette, 300);
+$calendar-frontend-warn: mat.m2-define-palette($calendar-frontend-warn-palette, 500);
+
+$calendar-frontend-theme: mat.m2-define-light-theme((color: (primary: $calendar-frontend-primary,
+        accent: $calendar-frontend-accent,
+        warn: $calendar-frontend-warn,
+      )));
+
+$calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calendar-frontend-primary-dark,
+        accent: $calendar-frontend-accent,
+        warn: $calendar-frontend-warn,
+      )));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($calendar-frontend-theme);
+
+  .dark-theme {
+    @include mat.all-component-colors($calendar-frontend-theme-dark);
+
+    .mat-card-content {
+      color: white;
+    }
+
+    //There might be some additional classes that need color configurations for dark mode
+    .fc-multimonth-daygrid {
+      background-color: #222222;
+    }
+  }
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($calendar-frontend-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($calendar-frontend-theme);
 /* You can add global styles to this file, and also import other style files */
+@import './material.scss';
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  min-height: 100vh;
+  height: auto;
+}
+
+body {
+  margin: 0;
+}
+
+.mdc-switch__icons {
+  display: none;
+}
