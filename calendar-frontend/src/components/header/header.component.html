@@ -1,1 +1,17 @@
-<p>header works!</p>
+<mat-toolbar id="navbar" class="mat-elevation-z5" color="primary" style="position: fixed; top:0; z-index: 5;">
+    <span style="font-size:large; font-weight: bold;">Calendar App</span>
+
+    <span style="flex: 1 1 auto;"></span>
+
+    <mat-card appearance="outlined" style="margin-left: 30px;">
+        <mat-card-content>
+            <span style="display: flex; align-items: center;">
+                <mat-icon fontSet="material-icons" color="warn">light_mode</mat-icon>
+                <mat-slide-toggle [checked]="darkMode" (change)="darkMode=!darkMode;checkDarkMode()"
+                    style="margin: 0 5px 0 5px;">
+                </mat-slide-toggle>
+                <mat-icon fontSet="material-icons" color="warn">dark_mode</mat-icon>
+            </span>
+        </mat-card-content>
+    </mat-card>
+</mat-toolbar>
