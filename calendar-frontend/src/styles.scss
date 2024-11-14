@@ -164,6 +164,11 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
       background-color: #222222;
     }
   }
+
+  //Changes to the calendar appearance
+  --fc-button-bg-color: #034875;
+  --fc-button-border-color: rgba(255, 255, 255, 0.12);
+  --fc-today-bg-color: #ffcc00ab;
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.
@@ -187,6 +192,18 @@ body {
 
 body {
   margin: 0;
+}
+
+.center {
+  margin: auto auto;
+  max-width: 80%;
+}
+
+.center-content {
+  margin: auto auto;
+  max-width: 80%;
+  justify-content: center;
+  text-align: center;
 }
 
 .mdc-switch__icons {

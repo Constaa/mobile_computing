@@ -20,7 +20,10 @@ export class CalendarComponent {
     initialView: 'multiMonthYear',
     plugins: [dayGridPlugin, multiMonthPlugin],
     locales: [deLocale, enLocale],
-    locale: 'de'
+    locale: 'de',
+    multiMonthMaxColumns: 6,
+    multiMonthMinWidth: 200,
+    contentHeight: 650
   };
 
   ngAfterViewInit() {

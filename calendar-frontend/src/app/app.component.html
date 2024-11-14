@@ -1,5 +1,9 @@
 <body id="root-element" class="mat-app-background" [@themeChange]="darkMode ? true: false">
-  <app-header></app-header>
-  <br>
-  <router-outlet></router-outlet>
+  <div id="app-container">
+    <app-header></app-header>
+    <br>
+    <div id="router-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </body>
