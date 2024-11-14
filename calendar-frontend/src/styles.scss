@@ -166,6 +166,7 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
   }
 
   //Changes to the calendar appearance
+  //TODO: separate these styles into a separate file (dark mode adjustments needed?)
   --fc-button-bg-color: #034875;
   --fc-button-border-color: rgba(255, 255, 255, 0.12);
   --fc-today-bg-color: #ffcc00ab;
@@ -204,6 +205,16 @@ body {
   max-width: 80%;
   justify-content: center;
   text-align: center;
+}
+
+.dialog-container {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dialog-container>mat-dialog-content {
+  overflow: visible;
+  margin-bottom: 10px;
 }
 
 .mdc-switch__icons {
