@@ -1,6 +1,14 @@
 <mat-toolbar id="navbar" class="mat-elevation-z5" color="primary" style="position: fixed; top:0; z-index: 5;">
     <span style="font-size:large; font-weight: bold;">Calendar App</span>
 
+    <!--TODO: Show / Hide buttons depending on user role-->
+    <span style="margin-left: 1vw;">
+        <button mat-raised-button routerLink="/calendar">Kalender</button>
+    </span>
+    <span style="margin-left: 1vw;">
+        <button mat-raised-button routerLink="/admin">Admin Test</button>
+    </span>
+
     <span style="flex: 1 1 auto;"></span>
 
     <mat-card appearance="outlined" style="margin-left: 30px;">

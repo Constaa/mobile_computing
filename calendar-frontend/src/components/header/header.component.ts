@@ -3,13 +3,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 import { AppComponent } from '../../app/app.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatSelectModule, MatIconModule, MatCardModule, MatSlideToggleModule],
+  imports: [MatToolbarModule, MatSelectModule, MatIconModule, MatCardModule, MatSlideToggleModule, MatButtonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
