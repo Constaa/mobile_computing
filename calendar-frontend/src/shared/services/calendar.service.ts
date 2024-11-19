@@ -12,8 +12,13 @@ export class CalendarService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /**
+   * Function for getting calendar event data from the backend.
+   * @returns Observable list of CalendarEvent objects that represent the event data received from the backend.
+   */
   getCalendarEvents(): Observable<CalendarEvent[]> {
     return this.httpClient.get(this.apiUrl + "/getEvents", { observe: 'response' }).pipe(map(x =>
+      //Map the received data to a list of CalendarEvents for further handling.
       <CalendarEvent[]>x.body
     ));
   }

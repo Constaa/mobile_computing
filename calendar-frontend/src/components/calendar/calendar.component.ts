@@ -39,23 +39,34 @@ export class CalendarComponent implements OnInit {
 
   constructor(private store: Store) { }
 
+  /**
+   * Internal Angular function that is called on component initialization.
+   * Can be used to set up initial data by calling function directly on component startup.
+   */
   ngOnInit(): void {
     this.calendarEvents$ = this.store.select(CalendarSelectors.selectCalendarEvents);
     this.calendarEvents$.subscribe(x => {
-      //this.calendarEvents = x;
-      try {
+      //Check if the reference to the calendar component is already initialized and assign the received event data.
+      if (this.calendarComponent) {
         this.calendarComponent.events = <EventInput>x;
-      } catch (ex) {
-        console.log(ex);
       }
-    })
+    });
+
     this.store.dispatch(CalendarActions.LoadCalendarEvents());
   }
 
+  /**
+   * Internal Angular function that is called after the component view has been initialized (as in the HTML DOM has been created).
+   */
   ngAfterViewInit() {
+    //Assign the defined options to the calendar
     this.calendarComponent.options = this.calendarOptions;
   }
 
+  /**
+   * Function for setting the current calendar language.
+   * @param languageCode The language code to be set as the current language of the calendar.
+   */
   setCalendarLanguage(languageCode: string) {
     this.calendarOptions.locale = languageCode;
   }

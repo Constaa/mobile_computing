@@ -15,6 +15,9 @@ import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.co
 export class AdminComponent {
   readonly dialog = inject(MatDialog);
 
+  /**
+   * Function for opening the dialog window containing the form for adding new events.
+   */
   openDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialogComponent, { autoFocus: false });
 

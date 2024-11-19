@@ -24,6 +24,9 @@ export class AddEventDialogComponent {
     end: new FormControl<Date | null>(null),
   });
 
+  /**
+   * Function for closing the dialog window.
+   */
   cancel(): void {
     this.dialogRef.close();
   }

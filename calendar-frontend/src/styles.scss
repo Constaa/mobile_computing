@@ -13,9 +13,9 @@ $calendar-frontend-theme: mat.define-theme((color: (theme-type: light,
         primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
       ),
-      density: (scale: 0,
-      )));
+      density: (scale: 0, )));
 
+// Define the primary color palette
 $calendar-frontend-primary-palette: (
   50: #034875,
   100: #0662a0,
@@ -39,6 +39,7 @@ $calendar-frontend-primary-palette: (
     50: #ffffff)
 );
 
+// Define the primary color palette for dark mode
 $calendar-frontend-primary-palette-dark: (
   50: #034875,
   100: #0662a0,
@@ -85,6 +86,7 @@ $calendar-frontend-primary-palette-dark: (
 //     900: #000000)
 // );
 
+// Define the accent color palette
 $calendar-frontend-accent-palette: (
   50: #000000,
   100: #111111,
@@ -108,6 +110,7 @@ $calendar-frontend-accent-palette: (
     900: #000000)
 );
 
+// Define the warn color palette
 $calendar-frontend-warn-palette: (
   50: #806811,
   100: #8f7517,
@@ -131,11 +134,13 @@ $calendar-frontend-warn-palette: (
     900: #000000)
 );
 
+// Create variables for the different theme palettes
 $calendar-frontend-primary: mat.m2-define-palette($calendar-frontend-primary-palette, 50);
 $calendar-frontend-primary-dark: mat.m2-define-palette($calendar-frontend-primary-palette-dark, 50);
 $calendar-frontend-accent: mat.m2-define-palette($calendar-frontend-accent-palette, 300);
 $calendar-frontend-warn: mat.m2-define-palette($calendar-frontend-warn-palette, 500);
 
+// Define the light and dark theme
 $calendar-frontend-theme: mat.m2-define-light-theme((color: (primary: $calendar-frontend-primary,
         accent: $calendar-frontend-accent,
         warn: $calendar-frontend-warn,
@@ -179,6 +184,8 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
 // Comment out the line below if you want to use the deprecated `color` inputs.
 // @include mat.color-variants-backwards-compatibility($calendar-frontend-theme);
 /* You can add global styles to this file, and also import other style files */
+
+// Add the styles for the Material Icons
 @import './material.scss';
 
 * {
