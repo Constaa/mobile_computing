@@ -44,6 +44,9 @@ export class CalendarComponent implements OnInit {
    * Can be used to set up initial data by calling function directly on component startup.
    */
   ngOnInit(): void {
+    //TODO: Implement interval that continously gets the data from the backend
+
+    //Select the state from the store and subscribe to receive updates when the data changes
     this.calendarEvents$ = this.store.select(CalendarSelectors.selectCalendarEvents);
     this.calendarEvents$.subscribe(x => {
       //Check if the reference to the calendar component is already initialized and assign the received event data.
@@ -52,6 +55,7 @@ export class CalendarComponent implements OnInit {
       }
     });
 
+    //Dispath the store action to load the data
     this.store.dispatch(CalendarActions.LoadCalendarEvents());
   }
 
