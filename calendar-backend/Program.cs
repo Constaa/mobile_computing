@@ -11,6 +11,7 @@ namespace calendar_backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add CORS
             builder.Services.AddCors(options =>
                 options.AddPolicy(
                   name: "CorsPolicy",
@@ -19,6 +20,7 @@ namespace calendar_backend
                       builder.AllowAnyMethod()
                       .AllowAnyHeader()
                       .AllowCredentials()
+                      //Allow origin of Angular frontend in local testing
                       .WithOrigins("http://localhost:4200");
                   })
             );
@@ -39,6 +41,7 @@ namespace calendar_backend
                 app.UseSwaggerUI();
             }
 
+            // Https redirection is used conditionally to fix access issues in local test environments
             if (!app.Environment.IsDevelopment())
             {
                 app.UseHttpsRedirection();
@@ -47,7 +50,6 @@ namespace calendar_backend
             app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
-
 
             #region routes
             app.MapGet("api/getEvents", (HttpContext httpContext) =>
@@ -89,6 +91,8 @@ namespace calendar_backend
             })
             .Produces<List<CalendarEvent>>(StatusCodes.Status200OK);
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             app.MapGet("api/test", (HttpContext httpContext) =>
             {
                 return TypedResults.Ok(true);
@@ -103,7 +107,7 @@ namespace calendar_backend
             .Produces<bool>(StatusCodes.Status200OK);
             //.RequireAuthorization();
 
-            //////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             app.MapGet("api/mariaDBExample", (HttpContext httpContext) =>
             {
