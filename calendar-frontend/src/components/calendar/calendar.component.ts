@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventInput } from '@fullcalendar/core/index.js';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import deLocale from '@fullcalendar/core/locales/de';
 import enLocale from '@fullcalendar/core/locales/en-gb'
@@ -26,9 +28,14 @@ export class CalendarComponent implements OnInit {
 
   calendarOptions: CalendarOptions = {
     initialView: 'multiMonthYear',
-    plugins: [dayGridPlugin, multiMonthPlugin],
+    plugins: [dayGridPlugin, multiMonthPlugin, timeGridPlugin, listPlugin],
     locales: [deLocale, enLocale],
     locale: 'de',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,multiMonthYear,timeGridWeek,timeGridDay,listWeek'
+    },
 
     //Messes with the display of events
     //TODO: figure out another way to fit all month onto a single page
