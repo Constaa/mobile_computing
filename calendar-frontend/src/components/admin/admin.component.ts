@@ -4,14 +4,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-admin',
+  standalone: true,
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule,],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
@@ -38,28 +38,3 @@ export class AdminComponent {
     })
   }
 }
-
-
-@NgModule({
-  imports: [
-    // Andere Module
-    FormsModule,
-  ],
-})
-export class AppModule {}
-
-@NgModule({
-  declarations: [AdminComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatIcon,
-  ],
-  exports: [AdminComponent],
-})
-export class AdminModule {}
