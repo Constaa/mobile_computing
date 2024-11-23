@@ -1,23 +1,33 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-admin',
-  standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
   readonly dialog = inject(MatDialog);
+  isLoggedIn = false;
+  username = '';
+  password = '';
 
-  /**
-   * Function for opening the dialog window containing the form for adding new events.
-   */
+  login() {
+    if (this.username === 'admin' && this.password === 'password') {
+      this.isLoggedIn = true;
+    } else {
+      alert('Ungültige Anmeldedaten!');
+    }
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialogComponent, { autoFocus: false });
 
@@ -28,3 +38,28 @@ export class AdminComponent {
     })
   }
 }
+
+
+@NgModule({
+  imports: [
+    // Andere Module
+    FormsModule,
+  ],
+})
+export class AppModule {}
+
+@NgModule({
+  declarations: [AdminComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatIcon,
+  ],
+  exports: [AdminComponent],
+})
+export class AdminModule {}
