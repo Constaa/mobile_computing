@@ -8,11 +8,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { AppComponent } from '../../app/app.component';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
+import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatSelectModule, MatIconModule, MatCardModule, MatSlideToggleModule, MatButtonModule, FormsModule, RouterLink],
+  imports: [MatToolbarModule, MatSelectModule, MatIconModule, MatCardModule, MatSlideToggleModule, MatButtonModule, FormsModule, TranslateModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -21,7 +25,7 @@ export class HeaderComponent {
   navbar: any = null;
   currentLanguage: string = "de";
 
-  constructor(private app: AppComponent) { }
+  constructor(private app: AppComponent, private store: Store) { }
 
   ngAfterContentInit() {
     this.navbar = document.getElementById("navbar") as HTMLElement;
@@ -65,5 +69,6 @@ export class HeaderComponent {
   }
 
   setCalendarLanguage(event: MatSelectChange) {
+    this.store.dispatch(CalendarActions.SetUserLanguage({ language: event.value }));
   }
 }

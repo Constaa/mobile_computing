@@ -25,6 +25,8 @@ export class CalendarComponent implements OnInit {
 
   calendarEvents$!: Observable<CalendarEvent[]>;
   calendarEvents: CalendarEvent[] = [];
+  calendarLanguage$!: Observable<string>;
+  calendarLanguage!: string;
 
   calendarOptions: CalendarOptions = {
     initialView: 'multiMonthYear',
@@ -62,6 +64,12 @@ export class CalendarComponent implements OnInit {
       }
     });
 
+    this.calendarLanguage$ = this.store.select(CalendarSelectors.selectCurrentUserLanguage);
+    this.calendarLanguage$.subscribe(x => {
+      this.calendarLanguage = x;
+      this.setCalendarLanguage(x);
+    })
+
     //Dispath the store action to load the data
     this.store.dispatch(CalendarActions.LoadCalendarEvents());
   }
@@ -79,6 +87,7 @@ export class CalendarComponent implements OnInit {
    * @param languageCode The language code to be set as the current language of the calendar.
    */
   setCalendarLanguage(languageCode: string) {
+    console.log(`calendar: ${languageCode}`);
     this.calendarOptions.locale = languageCode;
   }
 }

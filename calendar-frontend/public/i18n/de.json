@@ -1,0 +1,23 @@
+{
+    "header": {
+        "calendar": "Kalender",
+        "admin": "Admin",
+        "languageSelect": "Sprachauswahl"
+    },
+    "admin": {
+        "username": "Benutzername",
+        "password": "Passwort",
+        "login": "Login",
+        "manageEvents": "Termine verwalten",
+        "addEvent": "Termin hinzufügen"
+    },
+    "add-event-dialog": {
+        "title": "Titel",
+        "description": "Beschreibung",
+        "timespan": "Zeitraum",
+        "errorStart": "Invalider Startzeitpunkt",
+        "errorEnd": "Invalider Endzeitpunkt",
+        "cancel": "Abbrechen",
+        "addEvent": "Termin hinzufügen"
+    }
+}

@@ -7,18 +7,18 @@
     <mat-card-content>
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <mat-form-field appearance="outline" class="full-width" color="accent">
-          <mat-label>Benutzername</mat-label>
+          <mat-label>{{'admin.username' | translate}}</mat-label>
           <input matInput required [(ngModel)]="username" name="username" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width" color="accent">
-          <mat-label>Passwort</mat-label>
+          <mat-label>{{'admin.password' | translate}}</mat-label>
           <input matInput type="password" required [(ngModel)]="password" name="password" />
         </mat-form-field>
 
         <div class="button-container">
           <button mat-raised-button color="primary" type="submit">
-            Login
+            {{'admin.login' | translate}}
           </button>
         </div>
       </form>
@@ -29,7 +29,7 @@
 <div class="appointment-container">
   <mat-card appearance="outlined" class="center">
     <mat-card-header class="center-content">
-      <h1>Termine verwalten</h1>
+      <h1>{{'admin.manageEvents' | translate}}</h1>
     </mat-card-header>
     <mat-card-content class="center-content">
       TABELLARISCHE LISTE ALLER TERMINE MIT OPTION ZUR LÖSCHUNG
@@ -39,7 +39,7 @@
 
       <button mat-fab extended color="primary" (click)="openDialog()">
         <mat-icon fontSet="material-icons">edit_calendar</mat-icon>
-        Termin hinzufügen
+        {{'admin.addEvent' | translate}}
       </button>
     </mat-card-content>
   </mat-card>

@@ -1,21 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../components/header/header.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { TranslateService } from '@ngx-translate/core';
+import { CalendarComponent } from '../components/calendar/calendar.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as CalendarActions from '../shared/store/calendar/calendar.actions';
+import * as CalendarSelectors from '../shared/store/calendar/calendar.selectors';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent],
+  providers: [CalendarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'calendar-frontend';
   darkMode: boolean = false;
   rootElement: any = null;
+  currentLanguage$!: Observable<string>;
+  currentLanguage: string = "de";
 
-  constructor(public overlayContainer: OverlayContainer) { }
+  constructor(public overlayContainer: OverlayContainer, private translate: TranslateService, private store: Store) {
+    this.translate.addLangs(['de', 'en-gb']);
+    this.translate.setDefaultLang('de');
+    this.translate.use('de');
+  }
+
+  ngOnInit() {
+    this.currentLanguage$ = this.store.select(CalendarSelectors.selectCurrentUserLanguage);
+    this.currentLanguage$.subscribe(x => {
+      this.translate.use(x);
+    })
+  }
 
   ngAfterContentInit() {
     //Handle dark mode after first component initialization

@@ -1,0 +1,23 @@
+{
+    "header": {
+        "calendar": "Calendar",
+        "admin": "Admin",
+        "languageSelect": "Language selection"
+    },
+    "admin": {
+        "username": "User name",
+        "password": "Password",
+        "login": "Login",
+        "manageEvents": "Manage events",
+        "addEvent": "Add event"
+    },
+    "add-event-dialog": {
+        "title": "Title",
+        "description": "Description",
+        "timespan": "Timespan",
+        "errorStart": "Invalid start date",
+        "errorEnd": "Invalid end date",
+        "cancel": "Cancel",
+        "addEvent": "Add event"
+    }
+}

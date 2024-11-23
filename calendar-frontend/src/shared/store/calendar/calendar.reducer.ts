@@ -38,8 +38,8 @@ export const _calendarReducer = createReducer(
     /**
      * On detecting a SetUserLanguage action, set the current language to represent the action payload.
      */
-    on(CalendarActions.SetUserLanguage, (state, { payload }) => {
-        return { ...state, currentUserLang: payload }
+    on(CalendarActions.SetUserLanguage, (state, { language }) => {
+        return { ...state, currentUserLang: language }
     }),
 )
 

@@ -23,10 +23,5 @@ export const ReceivedCalendarEvents = createAction(
 //Create the action for setting the currently used language
 export const SetUserLanguage = createAction(
     SET_USER_LANGUAGE,
-    props<{ payload: string }>()
-)
-
-//Create the action for succesfully set used language
-export const SetUserLanguageDone = createAction(
-    SET_USER_LANGUAGE_DONE
+    props<{ language: string }>()
 )

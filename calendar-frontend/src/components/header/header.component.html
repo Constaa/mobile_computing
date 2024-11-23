@@ -3,18 +3,18 @@
 
     <!--TODO: Show / Hide buttons depending on user role-->
     <span style="margin-left: 1vw;">
-        <button mat-raised-button routerLink="/calendar">Kalender</button>
+        <button mat-raised-button routerLink="/calendar">{{'header.calendar' | translate}}</button>
     </span>
     <span style="margin-left: 1vw;">
-        <button mat-raised-button routerLink="/admin">Admin Test</button>
+        <button mat-raised-button routerLink="/admin">{{'header.admin' | translate}}</button>
     </span>
 
     <span style="flex: 1 1 auto;"></span>
 
-    <span>
-        <mat-icon fontSet="material-icons">translate</mat-icon>
+    <span style="padding-top: 20px">
+        <mat-icon fontSet="material-icons">translate</mat-icon>&nbsp;
         <mat-form-field color="accent">
-            <mat-label>Sprachauswahl</mat-label>
+            <mat-label>{{'header.languageSelect' | translate}}</mat-label>
             <mat-select [ngModel]="currentLanguage" (selectionChange)="setCalendarLanguage($event)">
                 <mat-option value="de" selected>Deutsch</mat-option>
                 <mat-option value="en-gb">English</mat-option>
