@@ -28,6 +28,7 @@ export class AdminComponent {
       alert('Ungültige Anmeldedaten!');
     }
   }
+  
   openDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialogComponent, { autoFocus: false });
 

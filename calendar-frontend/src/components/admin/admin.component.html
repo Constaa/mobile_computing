@@ -6,12 +6,12 @@
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="login()" #loginForm="ngForm">
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline" class="full-width" color="accent">
           <mat-label>Benutzername</mat-label>
           <input matInput required [(ngModel)]="username" name="username" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline" class="full-width" color="accent">
           <mat-label>Passwort</mat-label>
           <input matInput type="password" required [(ngModel)]="password" name="password" />
         </mat-form-field>

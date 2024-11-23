@@ -63,29 +63,6 @@ $calendar-frontend-primary-palette-dark: (
     50: #ffffff)
 );
 
-// $calendar-frontend-accent-palette: (
-//   50: #00658d,
-//   100: #007fb0,
-//   200: #009bd5,
-//   300: #00a0dc,
-//   400: #39b6f3,
-//   500: #82cfff,
-//   600: #c6e7ff,
-//   700: #e4f3ff,
-//   800: #f5faff,
-//   900: #ffffff,
-//   contrast: (50: #ffffff,
-//     100: #ffffff,
-//     200: #ffffff,
-//     300: #ffffff,
-//     400: #000000,
-//     500: #000000,
-//     600: #000000,
-//     700: #000000,
-//     800: #000000,
-//     900: #000000)
-// );
-
 // Define the accent color palette
 $calendar-frontend-accent-palette: (
   50: #000000,
@@ -108,6 +85,29 @@ $calendar-frontend-accent-palette: (
     700: #000000,
     800: #000000,
     900: #000000)
+);
+
+$calendar-frontend-accent-palette-dark: (
+  50: #ffffff,
+  100: #bbbbbb,
+  200: #aaaaaa,
+  300: #888888,
+  400: #666666,
+  500: #555555,
+  600: #333333,
+  700: #222222,
+  800: #111111,
+  900: #000000,
+  contrast: (50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff)
 );
 
 // Define the warn color palette
@@ -138,6 +138,7 @@ $calendar-frontend-warn-palette: (
 $calendar-frontend-primary: mat.m2-define-palette($calendar-frontend-primary-palette, 50);
 $calendar-frontend-primary-dark: mat.m2-define-palette($calendar-frontend-primary-palette-dark, 50);
 $calendar-frontend-accent: mat.m2-define-palette($calendar-frontend-accent-palette, 300);
+$calendar-frontend-accent-dark: mat.m2-define-palette($calendar-frontend-accent-palette-dark, 50);
 $calendar-frontend-warn: mat.m2-define-palette($calendar-frontend-warn-palette, 500);
 
 // Define the light and dark theme
@@ -147,7 +148,7 @@ $calendar-frontend-theme: mat.m2-define-light-theme((color: (primary: $calendar-
       )));
 
 $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calendar-frontend-primary-dark,
-        accent: $calendar-frontend-accent,
+        accent: $calendar-frontend-accent-dark,
         warn: $calendar-frontend-warn,
       )));
 

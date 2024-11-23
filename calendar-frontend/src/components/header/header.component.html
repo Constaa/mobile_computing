@@ -11,6 +11,17 @@
 
     <span style="flex: 1 1 auto;"></span>
 
+    <span>
+        <mat-icon fontSet="material-icons">translate</mat-icon>
+        <mat-form-field color="accent">
+            <mat-label>Sprachauswahl</mat-label>
+            <mat-select [ngModel]="currentLanguage" (selectionChange)="setCalendarLanguage($event)">
+                <mat-option value="de" selected>Deutsch</mat-option>
+                <mat-option value="en-gb">English</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </span>
+
     <mat-card appearance="outlined" style="margin-left: 30px;">
         <mat-card-content>
             <span style="display: flex; align-items: center;">
