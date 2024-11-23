@@ -165,7 +165,8 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
     }
 
     //There might be some additional classes that need color configurations for dark mode
-    .fc-multimonth-daygrid {
+    .fc-multimonth-daygrid,
+    .fc-list-day-cushion {
       background-color: #222222;
     }
   }
