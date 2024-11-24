@@ -170,6 +170,8 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
     .fc-list-day-cushion {
       background-color: #222222;
     }
+
+    --fc-list-event-hover-bg-color: #222222a0;
   }
 
   //Changes to the calendar appearance

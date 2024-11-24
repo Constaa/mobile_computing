@@ -12,6 +12,7 @@ import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { Store } from '@ngrx/store';
 import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
 import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-calendar',
@@ -46,7 +47,7 @@ export class CalendarComponent implements OnInit {
     // contentHeight: 650
   };
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private translate: TranslateService) { }
 
   /**
    * Internal Angular function that is called on component initialization.
@@ -80,6 +81,9 @@ export class CalendarComponent implements OnInit {
   ngAfterViewInit() {
     //Assign the defined options to the calendar
     this.calendarComponent.options = this.calendarOptions;
+    this.calendarComponent.options.eventClick = function (info) {
+      alert(`Event: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}`);
+    }
   }
 
   /**
@@ -87,7 +91,6 @@ export class CalendarComponent implements OnInit {
    * @param languageCode The language code to be set as the current language of the calendar.
    */
   setCalendarLanguage(languageCode: string) {
-    console.log(`calendar: ${languageCode}`);
     this.calendarOptions.locale = languageCode;
   }
 }
