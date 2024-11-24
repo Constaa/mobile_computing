@@ -75,7 +75,11 @@ namespace calendar_backend {
                                     End = DateTime.Parse(row["end"].ToString()),
                                     //When daysOfWeek is unset => set it to null. Setting to an empty list results in events not being rendered in frontend
                                     DaysOfWeek = row["daysOfWeek"].ToString() == "" ? null : row["daysOfWeek"].ToString()!.Split(',').Select(int.Parse).ToList(),
-                                    Title = row["title"].ToString()!
+                                    Title = row["title"].ToString()!,
+                                    Description = row["description"].ToString()!,
+                                    MinParticipants = Convert.ToInt32(row["minParticipants"].ToString()) == null ? 0 : Convert.ToInt32(row["minParticipants"].ToString()),
+                                    MaxParticipants = Convert.ToInt32(row["maxParticipants"].ToString()) == null ? 0 : Convert.ToInt32(row["minParticipants"].ToString()),
+                                    ClassName = row["className"].ToString()
                                 };
 
                                 list.Add(calendarEvent);
