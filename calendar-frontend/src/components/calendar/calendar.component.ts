@@ -60,6 +60,7 @@ export class CalendarComponent implements OnInit {
     this.calendarEvents$ = this.store.select(CalendarSelectors.selectCalendarEvents);
     this.calendarEvents$.subscribe(x => {
       //Check if the reference to the calendar component is already initialized and assign the received event data.
+      this.calendarEvents = x;
       if (this.calendarComponent) {
         this.calendarComponent.events = <EventInput>x;
       }
