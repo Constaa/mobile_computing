@@ -19,5 +19,10 @@
         "errorEnd": "Invalid end date",
         "cancel": "Cancel",
         "addEvent": "Add event"
+    },
+    "calendar": {
+        "category": "Category",
+        "search": "Enter search term",
+        "searchButton": "Apply filters"
     }
 }

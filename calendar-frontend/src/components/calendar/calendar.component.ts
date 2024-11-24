@@ -12,12 +12,16 @@ import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { Store } from '@ngrx/store';
 import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
 import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [FullCalendarModule],
+  imports: [FullCalendarModule, MatSelectModule, FormsModule, TranslateModule, MatIconModule, MatInputModule],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss'
 })
@@ -28,6 +32,8 @@ export class CalendarComponent implements OnInit {
   calendarEvents: CalendarEvent[] = [];
   calendarLanguage$!: Observable<string>;
   calendarLanguage!: string;
+  currentCategory: string = "all";
+  searchQuery: string = '';
 
   calendarOptions: CalendarOptions = {
     initialView: 'multiMonthYear',
@@ -94,4 +100,14 @@ export class CalendarComponent implements OnInit {
   setCalendarLanguage(languageCode: string) {
     this.calendarOptions.locale = languageCode;
   }
+  setCategory(event: MatSelectChange) {
+    console.log(event.value) // hier sollen Sachen passieren @Marc
+  }
+  applyFilters(): void {
+    console.log('Aktuelle Filter:', {
+        category: this.currentCategory,
+        searchQuery: this.searchQuery,
+    });
+  }
+  
 }
