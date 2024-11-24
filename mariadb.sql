@@ -27,15 +27,20 @@ CREATE TABLE IF NOT EXISTS `calendarevents` (
   `end` timestamp NULL DEFAULT NULL,
   `daysOfWeek` varchar(50) DEFAULT '',
   `title` varchar(50) DEFAULT '',
+  `className` varchar(50) DEFAULT '',
+  `description` varchar(250) DEFAULT '',
+  `minParticipants` int(11) DEFAULT 0,
+  `maxParticipants` int(11) DEFAULT 0,
   `_year` year(4) DEFAULT NULL,
   KEY `Schlüssel 1` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- Exportiere Daten aus Tabelle mobilecomputing.calendarevents: ~3 rows (ungefähr)
-INSERT INTO `calendarevents` (`Id`, `allDay`, `start`, `end`, `daysOfWeek`, `title`, `_year`) VALUES
-	(5, 0, '2024-11-19 15:09:26', '2024-11-19 17:09:26', '', 'First event', '2024'),
-	(6, 1, '2024-11-23 15:09:26', '2024-11-23 17:09:26', '', 'Second event', '2024'),
-	(7, 0, '2024-11-23 15:09:26', '2024-11-25 17:09:26', '', 'Third event', '2024');
+INSERT INTO `calendarevents` (`Id`, `allDay`, `start`, `end`, `daysOfWeek`, `title`, `className`, `description`, `minParticipants`, `maxParticipants`, `_year`) VALUES
+	(5, 0, '2024-11-19 15:09:26', '2024-11-19 17:09:26', '', 'First event', '', 'Description1', 0, 0, '2024'),
+	(6, 1, '2024-11-23 15:09:26', '2024-11-23 17:09:26', '', 'Second event', '', 'Description2', 0, 0, '2024'),
+	(7, 0, '2024-11-23 15:09:26', '2024-11-25 17:09:26', '', 'Third event', '', '', 0, 0, '2024'),
+	(8, 0, '2024-11-25 15:37:54', '2024-11-25 18:37:54', '', 'Fourth event', '', '', 0, 0, '2024');
 
 -- Exportiere Struktur von Trigger mobilecomputing.insert_year_trigger
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
