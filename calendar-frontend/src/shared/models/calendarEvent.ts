@@ -1,8 +1,12 @@
 export interface CalendarEvent {
-    id: number;
-    allDay: boolean;
-    start: Date;
-    end: Date;
+    id: number,
+    allDay: boolean,
+    start: Date,
+    end: Date,
     daysOfWeek: number[],
-    title: string;
+    title: string,
+    description: string,
+    minParticipants: number,
+    maxParticipants: number,
+    className: string
 }

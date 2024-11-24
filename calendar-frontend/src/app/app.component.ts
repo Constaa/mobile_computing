@@ -6,13 +6,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { CalendarComponent } from '../components/calendar/calendar.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as CalendarActions from '../shared/store/calendar/calendar.actions';
 import * as CalendarSelectors from '../shared/store/calendar/calendar.selectors';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, MatButtonModule, MatIconModule],
   providers: [CalendarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -79,5 +80,9 @@ export class AppComponent implements OnInit {
       this.overlayContainer.getContainerElement().classList.remove("dark-theme");
       window.localStorage.setItem("Angular_Dark_Mode_Calendar", "0");
     }
+  }
+
+  openHelp() {
+    
   }
 }
