@@ -89,7 +89,13 @@ export class CalendarComponent implements OnInit {
     //Assign the defined options to the calendar
     this.calendarComponent.options = this.calendarOptions;
     this.calendarComponent.options.eventClick = function (info) {
-      alert(`Event: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}`);
+      //Hard-code translations as the http loader used in ngx-translate is not yet iitialized completly at this point.
+      if (info.view.calendar.getOption('locale') == "de") {
+        alert(`Titel: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}`);
+      } else {
+        //Use generall 'else' statement instead if 'else if' to use english as a de facto default when the current locale is unexpected. 
+        alert(`Title: ${info.event.title}\r\Description: ${info.event.extendedProps["description"]}`);
+      }
     }
   }
 
@@ -105,9 +111,9 @@ export class CalendarComponent implements OnInit {
   }
   applyFilters(): void {
     console.log('Aktuelle Filter:', {
-        category: this.currentCategory,
-        searchQuery: this.searchQuery,
+      category: this.currentCategory,
+      searchQuery: this.searchQuery,
     });
   }
-  
+
 }
