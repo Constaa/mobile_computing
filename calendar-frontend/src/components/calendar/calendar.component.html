@@ -1,6 +1,6 @@
-<span style="padding-top: 20px; display: flex; align-items: center; gap: 15px;">
-    <mat-icon fontSet="material-icons">filter_alt</mat-icon>&nbsp;
-    <mat-form-field color="accent">
+<span style="display: flex; align-items: center; gap: 15px;">
+    <mat-form-field color="accent" style="margin-top: 15px;">
+        <mat-icon matPrefix fontSet="material-icons">filter_alt</mat-icon>
         <mat-label>{{'calendar.category' | translate}}</mat-label>
         <mat-select [ngModel]="currentCategory" (selectionChange)="setCategory($event)">
             <mat-option value="all" selected>Alle</mat-option>
@@ -11,7 +11,7 @@
     </mat-form-field>
 
     <!-- Suchfeld -->
-    <mat-form-field color="accent" style="flex-grow: 1;">
+    <mat-form-field color="accent" style="flex-grow: 1; margin-top: 15px;">
         <mat-label>{{'calendar.search' | translate}}</mat-label>
         <input matInput [(ngModel)]="searchQuery" placeholder="Suchbegriff eingeben" />
     </mat-form-field>
