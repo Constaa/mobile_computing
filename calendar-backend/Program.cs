@@ -140,12 +140,16 @@ namespace calendar_backend {
                         using (MySqlCommand cmd = mysqlconnection.CreateCommand()) {
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandTimeout = 300;
-                            cmd.CommandText = "INSERT INTO calendarEvents (allDay, start, end, daysOfWeek, title) VALUES (@allDay, @start, @end, @daysOfWeek, @title)";
+                            cmd.CommandText = "INSERT INTO calendarEvents (allDay, start, end, daysOfWeek, title, description, className, minParticipants, maxParticipants) VALUES (@allDay, @start, @end, @daysOfWeek, @title, @description, @className, @minParticipants, @maxParticipants)";
                             cmd.Parameters.AddWithValue("@allDay", calendarEvent.AllDay);
                             cmd.Parameters.AddWithValue("@start", calendarEvent.Start);
                             cmd.Parameters.AddWithValue("@end", calendarEvent.End);
                             cmd.Parameters.AddWithValue("@daysOfWeek", String.Join(",", calendarEvent.DaysOfWeek));
                             cmd.Parameters.AddWithValue("@title", calendarEvent.Title);
+                            cmd.Parameters.AddWithValue("@description", calendarEvent.Description);
+                            cmd.Parameters.AddWithValue("@className", calendarEvent.ClassName);
+                            cmd.Parameters.AddWithValue("@minParticipants", calendarEvent.MinParticipants);
+                            cmd.Parameters.AddWithValue("@maxParticipants", calendarEvent.MaxParticipants);
 
                             var rowsAffected = cmd.ExecuteNonQuery();
 
