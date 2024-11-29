@@ -60,5 +60,7 @@ export class AddEventDialogComponent {
 
     console.log(this.newEvent);
     this.calendarService.addCalendarEvent(this.newEvent);
+
+    this.cancel();
   }
 }
