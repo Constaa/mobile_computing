@@ -19,5 +19,10 @@
         "errorEnd": "Invalider Endzeitpunkt",
         "cancel": "Abbrechen",
         "addEvent": "Termin hinzufügen"
+    },
+    "calendar": {
+        "category": "Kategorie",
+        "search": "Suchbegriff eingeben",
+        "searchButton": "Filter anwenden"
     }
 }

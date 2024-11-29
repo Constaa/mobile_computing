@@ -12,12 +12,17 @@ import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { Store } from '@ngrx/store';
 import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
 import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [FullCalendarModule],
+  imports: [FullCalendarModule, MatSelectModule, FormsModule, TranslateModule, MatIconModule, MatInputModule, MatButtonModule],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss'
 })
@@ -28,6 +33,8 @@ export class CalendarComponent implements OnInit {
   calendarEvents: CalendarEvent[] = [];
   calendarLanguage$!: Observable<string>;
   calendarLanguage!: string;
+  currentCategory: string = "all";
+  searchQuery: string = '';
 
   calendarOptions: CalendarOptions = {
     initialView: 'multiMonthYear',
@@ -83,7 +90,13 @@ export class CalendarComponent implements OnInit {
     //Assign the defined options to the calendar
     this.calendarComponent.options = this.calendarOptions;
     this.calendarComponent.options.eventClick = function (info) {
-      alert(`Event: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}`);
+      //Hard-code translations as the http loader used in ngx-translate is not yet iitialized completly at this point.
+      if (info.view.calendar.getOption('locale') == "de") {
+        alert(`Titel: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}`);
+      } else {
+        //Use generall 'else' statement instead if 'else if' to use english as a de facto default when the current locale is unexpected. 
+        alert(`Title: ${info.event.title}\r\Description: ${info.event.extendedProps["description"]}`);
+      }
     }
   }
 
@@ -94,4 +107,14 @@ export class CalendarComponent implements OnInit {
   setCalendarLanguage(languageCode: string) {
     this.calendarOptions.locale = languageCode;
   }
+  setCategory(event: MatSelectChange) {
+    console.log(event.value) // hier sollen Sachen passieren @Marc
+  }
+  applyFilters(): void {
+    console.log('Aktuelle Filter:', {
+      category: this.currentCategory,
+      searchQuery: this.searchQuery,
+    });
+  }
+
 }

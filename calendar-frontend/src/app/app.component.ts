@@ -83,6 +83,9 @@ export class AppComponent implements OnInit {
   }
 
   openHelp() {
-    
+    var currentLang = this.translate.currentLang;
+    var currentLocation = window.location.origin;
+    var url = `${currentLocation}/help_${currentLang}.pdf`;
+    window.open(url, '_blank');
   }
 }
