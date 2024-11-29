@@ -22,4 +22,10 @@ export class CalendarService {
       <CalendarEvent[]>x.body
     ));
   }
+
+  addCalendarEvent(event: CalendarEvent) {
+    //TODO: Add callback listener to check successful execution
+    console.log("service");
+    return this.httpClient.post<CalendarEvent>(this.apiUrl + "/addEvent", event, { observe: 'response' }).subscribe(x => console.log(x));
+  }
 }

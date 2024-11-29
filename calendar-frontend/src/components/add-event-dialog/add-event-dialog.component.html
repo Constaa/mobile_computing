@@ -3,42 +3,40 @@
 
     <mat-dialog-content>
         <!--TODO: Add handling of the following inputs-->
-        <form class="new-event-form">
-            <mat-form-field color="accent">
-                <mat-label>{{'add-event-dialog.title' | translate}}</mat-label>
-                <input matInput>
-            </mat-form-field>
+        <!-- <form class="new-event-form"> -->
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.title' | translate}}</mat-label>
+            <input matInput [(ngModel)]="eventTitle">
+        </mat-form-field>
 
-            <br>
+        <br>
 
-            <mat-form-field color="accent">
-                <mat-label>{{'add-event-dialog.description' | translate}}</mat-label>
-                <textarea matInput></textarea>
-            </mat-form-field>
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.description' | translate}}</mat-label>
+            <textarea matInput [(ngModel)]="eventDescription"></textarea>
+        </mat-form-field>
 
-            <br>
+        <br>
 
-            <mat-form-field color="accent">
-                <mat-label>{{'add-event-dialog.timespan' | translate}}</mat-label>
-                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                    <input matStartDate formControlName="start">
-                    <input matEndDate formControlName="end">
-                </mat-date-range-input>
-                <!--TODO: handle different locales-->
-                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.timespan' | translate}}</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                <input matStartDate formControlName="start" [(ngModel)]="eventStartDate">
+                <input matEndDate formControlName="end" [(ngModel)]="eventEndDate">
+            </mat-date-range-input>
+            <!--TODO: handle different locales-->
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
 
-                @if (range.controls.start.hasError('matStartDateInvalid')) {
-                <mat-error>{{'add-event-dialog.errorStart' | translate}}</mat-error>
-                }
-                @if (range.controls.end.hasError('matEndDateInvalid')) {
-                <mat-error>{{'add-event-dialog.errorEnd' | translate}}</mat-error>
-                }
-            </mat-form-field>
-        </form>
-
-
+            @if (range.controls.start.hasError('matStartDateInvalid')) {
+            <mat-error>{{'add-event-dialog.errorStart' | translate}}</mat-error>
+            }
+            @if (range.controls.end.hasError('matEndDateInvalid')) {
+            <mat-error>{{'add-event-dialog.errorEnd' | translate}}</mat-error>
+            }
+        </mat-form-field>
+        <!-- </form> -->
     </mat-dialog-content>
 
     <mat-dialog-actions align="center">
@@ -46,7 +44,7 @@
             <mat-icon fontSet="material-icons">close</mat-icon>
             {{'add-event-dialog.cancel' | translate}}
         </button>
-        <button mat-fab extended color="warn">
+        <button mat-fab extended color="warn" (click)="addCalendarEvent();">
             <mat-icon fontSet="material-icons-outlined">calendar_add_on</mat-icon>
             {{'add-event-dialog.addEvent' | translate}}
         </button>
