@@ -2,11 +2,14 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
+// Add the styles for the Material Icons
+@use './material.scss';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // Define the theme object.
 $calendar-frontend-theme: mat.define-theme((color: (theme-type: light,
@@ -171,14 +174,18 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
       background-color: #222222;
     }
 
-    --fc-list-event-hover-bg-color: #222222a0;
+    & {
+      --fc-list-event-hover-bg-color: #222222a0;
+    }
   }
 
   //Changes to the calendar appearance
   //TODO: separate these styles into a separate file (dark mode adjustments needed?)
-  --fc-button-bg-color: #034875;
-  --fc-button-border-color: rgba(255, 255, 255, 0.12);
-  --fc-today-bg-color: #ffcc00ab;
+  & {
+    --fc-button-bg-color: #034875;
+    --fc-button-border-color: rgba(255, 255, 255, 0.12);
+    --fc-today-bg-color: #ffcc00ab;
+  }
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.
@@ -188,10 +195,6 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
 // Comment out the line below if you want to use the deprecated `color` inputs.
 // @include mat.color-variants-backwards-compatibility($calendar-frontend-theme);
 /* You can add global styles to this file, and also import other style files */
-
-// Add the styles for the Material Icons
-@import './material.scss';
-
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
