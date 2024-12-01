@@ -3,12 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace calendar_backend
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
+namespace calendar_backend {
+    public class Program {
+        public static void Main(string[] args) {
             var builder = WebApplication.CreateBuilder(args);
 
             var _configuration = builder.Configuration;
@@ -18,8 +15,7 @@ namespace calendar_backend
             builder.Services.AddCors(options =>
                 options.AddPolicy(
                   name: "CorsPolicy",
-                  builder =>
-                  {
+                  builder => {
                       builder.AllowAnyMethod()
                       .AllowAnyHeader()
                       .AllowCredentials()
@@ -38,15 +34,13 @@ namespace calendar_backend
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            if (app.Environment.IsDevelopment()) {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
             // Https redirection is used conditionally to fix access issues in local test environments
-            if (!app.Environment.IsDevelopment())
-            {
+            if (!app.Environment.IsDevelopment()) {
                 app.UseHttpsRedirection();
             }
 
@@ -55,17 +49,13 @@ namespace calendar_backend
             app.UseAuthorization();
 
             #region routes
-            app.MapGet("api/getEvents", (HttpContext httpContext) =>
-            {
+            app.MapGet("api/getEvents", (HttpContext httpContext) => {
                 List<CalendarEvent> list = [];
 
-                try
-                {
-                    using (var mysqlconnection = new MySqlConnection(_connectionString))
-                    {
+                try {
+                    using (var mysqlconnection = new MySqlConnection(_connectionString)) {
                         mysqlconnection.Open();
-                        using (MySqlCommand cmd = mysqlconnection.CreateCommand())
-                        {
+                        using (MySqlCommand cmd = mysqlconnection.CreateCommand()) {
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandTimeout = 300;
                             cmd.CommandText = "Select * From calendarEvents Where _year=@year";
@@ -77,10 +67,8 @@ namespace calendar_backend
                             adapter.Fill(data);
 
                             //Iterate over all received rows and create the return list.
-                            foreach (DataRow row in data.Rows)
-                            {
-                                CalendarEvent calendarEvent = new()
-                                {
+                            foreach (DataRow row in data.Rows) {
+                                CalendarEvent calendarEvent = new() {
                                     Id = Convert.ToInt32(row["id"].ToString()),
                                     AllDay = Convert.ToBoolean(row["allDay"]),
                                     Start = DateTime.Parse(row["start"].ToString() + "Z"),
@@ -94,22 +82,35 @@ namespace calendar_backend
                                     ClassName = row["className"].ToString()
                                 };
 
+                                if (!String.IsNullOrWhiteSpace(row["startRecur"].ToString())) {
+                                    calendarEvent.StartRecur = DateTime.Parse(row["startRecur"].ToString() + "Z");
+                                }
+
+                                if (!String.IsNullOrWhiteSpace(row["endRecur"].ToString())) {
+                                    calendarEvent.EndRecur = DateTime.Parse(row["endRecur"].ToString() + "Z");
+                                }
+
+                                if (!String.IsNullOrWhiteSpace(row["startTime"].ToString())) {
+                                    var test = TimeSpan.Parse(row["endTime"].ToString());
+                                    calendarEvent.StartTime = TimeSpan.Parse(row["startTime"].ToString()).ToString();
+                                }
+
+                                if (!String.IsNullOrWhiteSpace(row["endTime"].ToString())) {
+                                    var test = TimeSpan.Parse(row["endTime"].ToString());
+                                    calendarEvent.EndTime = TimeSpan.Parse(row["endTime"].ToString()).ToString();
+                                }
+
                                 list.Add(calendarEvent);
                             }
                             mysqlconnection.Close();
                         }
                     }
-                }
-                catch (MySqlException ex)
-                {
+                } catch (MySqlException ex) {
+                    //TODO: Add error handling
+                } catch (Exception ex) {
                     //TODO: Add error handling
                 }
-                catch (Exception ex)
-                {
-                    //TODO: Add error handling
-                }
-                finally
-                {
+                finally {
 
                 }
 
@@ -145,8 +146,7 @@ namespace calendar_backend
             })
             .WithName("Get events")
             .WithTags("Event")
-            .WithOpenApi(operation => new(operation)
-            {
+            .WithOpenApi(operation => new(operation) {
                 Summary = "Get calendar events",
                 Description = "Function for getting event data from the database."
             })
@@ -154,37 +154,49 @@ namespace calendar_backend
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            app.MapPost("api/addEvent", (HttpContext httpContext, [FromBody] CalendarEvent calendarEvent) =>
-            {
-                try
-                {
-                    using (var mysqlconnection = new MySqlConnection(_connectionString))
-                    {
+            app.MapPost("api/addEvent", (HttpContext httpContext, [FromBody] CalendarEvent calendarEvent) => {
+                try {
+                    using (var mysqlconnection = new MySqlConnection(_connectionString)) {
                         mysqlconnection.Open();
-                        using (MySqlCommand cmd = mysqlconnection.CreateCommand())
-                        {
+                        using (MySqlCommand cmd = mysqlconnection.CreateCommand()) {
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandTimeout = 300;
-                            cmd.CommandText = "INSERT INTO calendarEvents (allDay, start, end, daysOfWeek, title, description, className, minParticipants, maxParticipants) VALUES (@allDay, @start, @end, @daysOfWeek, @title, @description, @className, @minParticipants, @maxParticipants)";
-                            cmd.Parameters.AddWithValue("@allDay", calendarEvent.AllDay);
-                            cmd.Parameters.AddWithValue("@start", calendarEvent.Start);
-                            cmd.Parameters.AddWithValue("@end", calendarEvent.End);
-                            cmd.Parameters.AddWithValue("@daysOfWeek", String.Join(",", calendarEvent.DaysOfWeek));
-                            cmd.Parameters.AddWithValue("@title", calendarEvent.Title);
-                            cmd.Parameters.AddWithValue("@description", calendarEvent.Description);
-                            cmd.Parameters.AddWithValue("@className", calendarEvent.ClassName);
-                            cmd.Parameters.AddWithValue("@minParticipants", calendarEvent.MinParticipants);
-                            cmd.Parameters.AddWithValue("@maxParticipants", calendarEvent.MaxParticipants);
+
+                            if (calendarEvent.StartRecur != null) {
+                                cmd.CommandText = "INSERT INTO calendarEvents (allDay, start, end, daysOfWeek, title, description, className, minParticipants, maxParticipants, startRecur, endRecur, startTime, endTime) VALUES (@allDay, @start, @end, @daysOfWeek, @title, @description, @className, @minParticipants, @maxParticipants, @startRecur, @endRecur, @startTime, @endTime)";
+                                cmd.Parameters.AddWithValue("@allDay", calendarEvent.AllDay);
+                                cmd.Parameters.AddWithValue("@start", calendarEvent.Start);
+                                cmd.Parameters.AddWithValue("@end", calendarEvent.End);
+                                cmd.Parameters.AddWithValue("@daysOfWeek", String.Join(",", calendarEvent.DaysOfWeek));
+                                cmd.Parameters.AddWithValue("@title", calendarEvent.Title);
+                                cmd.Parameters.AddWithValue("@description", calendarEvent.Description);
+                                cmd.Parameters.AddWithValue("@className", calendarEvent.ClassName);
+                                cmd.Parameters.AddWithValue("@minParticipants", calendarEvent.MinParticipants);
+                                cmd.Parameters.AddWithValue("@maxParticipants", calendarEvent.MaxParticipants);
+                                cmd.Parameters.AddWithValue("@startRecur", calendarEvent.StartRecur);
+                                cmd.Parameters.AddWithValue("@endRecur", calendarEvent.EndRecur);
+                                cmd.Parameters.AddWithValue("@startTime", calendarEvent.StartRecur.Value.TimeOfDay.ToString());
+                                cmd.Parameters.AddWithValue("@endTime", calendarEvent.EndRecur.Value.TimeOfDay.ToString());
+                            } else {
+
+                                cmd.CommandText = "INSERT INTO calendarEvents (allDay, start, end, daysOfWeek, title, description, className, minParticipants, maxParticipants) VALUES (@allDay, @start, @end, @daysOfWeek, @title, @description, @className, @minParticipants, @maxParticipants)";
+                                cmd.Parameters.AddWithValue("@allDay", calendarEvent.AllDay);
+                                cmd.Parameters.AddWithValue("@start", calendarEvent.Start);
+                                cmd.Parameters.AddWithValue("@end", calendarEvent.End);
+                                cmd.Parameters.AddWithValue("@daysOfWeek", String.Join(",", calendarEvent.DaysOfWeek));
+                                cmd.Parameters.AddWithValue("@title", calendarEvent.Title);
+                                cmd.Parameters.AddWithValue("@description", calendarEvent.Description);
+                                cmd.Parameters.AddWithValue("@className", calendarEvent.ClassName);
+                                cmd.Parameters.AddWithValue("@minParticipants", calendarEvent.MinParticipants);
+                                cmd.Parameters.AddWithValue("@maxParticipants", calendarEvent.MaxParticipants);
+                            }
 
                             var rowsAffected = cmd.ExecuteNonQuery();
 
-                            if (rowsAffected != 1)
-                            {
+                            if (rowsAffected != 1) {
                                 cmd.Dispose();
                                 return Results.BadRequest();
-                            }
-                            else
-                            {
+                            } else {
                                 cmd.Dispose();
                             }
 
@@ -193,24 +205,18 @@ namespace calendar_backend
                             return TypedResults.Ok();
                         }
                     }
-                }
-                catch (MySqlException ex)
-                {
+                } catch (MySqlException ex) {
+                    return Results.BadRequest();
+                } catch (Exception ex) {
                     return Results.BadRequest();
                 }
-                catch (Exception ex)
-                {
-                    return Results.BadRequest();
-                }
-                finally
-                {
+                finally {
 
                 }
             })
             .WithName("Add event")
             .WithTags("Event")
-            .WithOpenApi(operation => new(operation)
-            {
+            .WithOpenApi(operation => new(operation) {
                 Summary = "Add calendar event",
                 Description = "Function for adding an event to the database."
             })
@@ -219,14 +225,12 @@ namespace calendar_backend
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-            app.MapGet("api/test", (HttpContext httpContext) =>
-            {
+            app.MapGet("api/test", (HttpContext httpContext) => {
                 return TypedResults.Ok(true);
             })
             .WithName("Test")
             .WithTags("System")
-            .WithOpenApi(operation => new(operation)
-            {
+            .WithOpenApi(operation => new(operation) {
                 Summary = "Test for checking access",
                 Description = "Function that simply returns 'true' when the request succeeds. Used for testing initial API access."
             })
@@ -235,21 +239,17 @@ namespace calendar_backend
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            app.MapGet("api/mariaDBExample", (HttpContext httpContext) =>
-            {
+            app.MapGet("api/mariaDBExample", (HttpContext httpContext) => {
                 //Used to not actually execute the function, as the underlying MariaDB does not exist.
                 return StatusCodes.Status501NotImplemented;
 
                 //Demo
                 List<string> list = new();
 
-                try
-                {
-                    using (var mysqlconnection = new MySqlConnection("CONNECTION_STRING"))
-                    {
+                try {
+                    using (var mysqlconnection = new MySqlConnection("CONNECTION_STRING")) {
                         mysqlconnection.Open();
-                        using (MySqlCommand cmd = mysqlconnection.CreateCommand())
-                        {
+                        using (MySqlCommand cmd = mysqlconnection.CreateCommand()) {
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandTimeout = 300;
                             cmd.CommandText = "Select * From tokens Where user=@user";
@@ -257,17 +257,12 @@ namespace calendar_backend
 
                             MySqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read())
-                            {
-                                for (int i = 0; i < reader.FieldCount; i++)
-                                {
+                            while (reader.Read()) {
+                                for (int i = 0; i < reader.FieldCount; i++) {
                                     {
-                                        if (i < 2)
-                                        {
+                                        if (i < 2) {
                                             list.Add(reader.GetString(i));
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             list.Add(reader.GetDateTime(i).ToString());
                                         }
                                     }
@@ -277,25 +272,19 @@ namespace calendar_backend
                             mysqlconnection.Close();
                         }
                     }
-                }
-                catch (MySqlException ex)
-                {
+                } catch (MySqlException ex) {
+                    //return false;
+                } catch (Exception ex) {
                     //return false;
                 }
-                catch (Exception ex)
-                {
-                    //return false;
-                }
-                finally
-                {
+                finally {
 
                 }
 
             })
             .WithName("MariaDB Example")
             .WithTags("System")
-            .WithOpenApi(operation => new(operation)
-            {
+            .WithOpenApi(operation => new(operation) {
                 Summary = "Demonstration of a MariaDB access call",
                 Description = "Function that demonstrates how data from MariaDB can be accessed."
             })

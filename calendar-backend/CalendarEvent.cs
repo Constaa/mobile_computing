@@ -10,5 +10,10 @@
         public int? MinParticipants { get; set; }
         public int? MaxParticipants { get; set; }
         public string ClassName { get; set; }
+
+        public DateTime? StartRecur { get; set; }
+        public DateTime? EndRecur { get; set; }
+        public string? StartTime { get; set; }
+        public string? EndTime { get; set; }
     }
 }
