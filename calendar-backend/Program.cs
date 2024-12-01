@@ -83,8 +83,8 @@ namespace calendar_backend
                                 {
                                     Id = Convert.ToInt32(row["id"].ToString()),
                                     AllDay = Convert.ToBoolean(row["allDay"]),
-                                    Start = DateTime.Parse(row["start"].ToString()),
-                                    End = DateTime.Parse(row["end"].ToString()),
+                                    Start = DateTime.Parse(row["start"].ToString() + "Z"),
+                                    End = DateTime.Parse(row["end"].ToString() + "Z"),
                                     //When daysOfWeek is unset => set it to null. Setting to an empty list results in events not being rendered in frontend
                                     DaysOfWeek = row["daysOfWeek"].ToString() == "" ? null : row["daysOfWeek"].ToString()!.Split(',').Select(int.Parse).ToList(),
                                     Title = row["title"].ToString()!,
