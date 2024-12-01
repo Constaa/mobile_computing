@@ -16,24 +16,11 @@
 
         <br>
 
-        <!--<mat-form-field color="accent">
-            <mat-label>{{'add-event-dialog.timespan' | translate}}</mat-label>
-            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                <input matStartDate formControlName="start" [(ngModel)]="eventStartDate">
-                <input matEndDate formControlName="end" [(ngModel)]="eventEndDate">
-            </mat-date-range-input>-->
-        <!--TODO: handle different locales-->
-        <!--<mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-checkbox [(ngModel)]="eventWholeDay" (click)="blur();">
+            {{'add-event-dialog.wholeDay' | translate}}
+        </mat-checkbox>
 
-            @if (range.controls.start.hasError('matStartDateInvalid')) {
-            <mat-error>{{'add-event-dialog.errorStart' | translate}}</mat-error>
-            }
-            @if (range.controls.end.hasError('matEndDateInvalid')) {
-            <mat-error>{{'add-event-dialog.errorEnd' | translate}}</mat-error>
-            }
-        </mat-form-field>-->
+        <br>
 
         <mat-form-field color="accent">
             <mat-label>{{'add-event-dialog.startDate' | translate}}</mat-label>
@@ -42,12 +29,12 @@
             <mat-datepicker-toggle [for]="datepickerStart" matSuffix />
         </mat-form-field>
 
-        <mat-form-field color="accent">
+        <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
             <mat-label>{{'add-event-dialog.startTime' | translate}}</mat-label>
             <input matInput [matTimepicker]="timepickerStart" [(ngModel)]="eventStartDate"
-                [ngModelOptions]="{updateOn: 'blur'}">
+                [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay" [class.timeDisabled]="eventWholeDay">
             <mat-timepicker #timepickerStart />
-            <mat-timepicker-toggle [for]="timepickerStart" matSuffix />
+            <mat-timepicker-toggle [for]="timepickerStart" matSuffix [class.timeDisabled]="eventWholeDay" />
         </mat-form-field>
 
         <br>
@@ -59,12 +46,12 @@
             <mat-datepicker-toggle [for]="datepickerEnd" matSuffix />
         </mat-form-field>
 
-        <mat-form-field color="accent">
+        <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
             <mat-label>{{'add-event-dialog.endTime' | translate}}</mat-label>
             <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate"
-                [ngModelOptions]="{updateOn: 'blur'}">
+                [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay" [class.timeDisabled]="eventWholeDay">
             <mat-timepicker #timepickerEnd />
-            <mat-timepicker-toggle [for]="timepickerEnd" matSuffix />
+            <mat-timepicker-toggle [for]="timepickerEnd" matSuffix [class.timeDisabled]="eventWholeDay"/>
         </mat-form-field>
     </mat-dialog-content>
 

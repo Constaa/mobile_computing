@@ -14,11 +14,12 @@ import { CalendarService } from '../../shared/services/calendar.service';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
 
 @Component({
   selector: 'app-add-event-dialog',
-  imports: [MatDialogModule, MatButtonModule, MatIconModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, ReactiveFormsModule, TranslateModule, MatTimepickerModule],
+  imports: [MatDialogModule, MatButtonModule, MatIconModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, ReactiveFormsModule, TranslateModule, MatTimepickerModule, MatCheckboxModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-event-dialog.component.html',
   styleUrl: './add-event-dialog.component.scss'
@@ -43,6 +44,7 @@ export class AddEventDialogComponent implements OnInit {
   eventDescription: string = "";
   eventStartDate!: Date;
   eventEndDate!: Date;
+  eventWholeDay: boolean = false;
 
   constructor(private calendarService: CalendarService, private store: Store) { }
 
@@ -67,10 +69,16 @@ export class AddEventDialogComponent implements OnInit {
     this.newEvent.description = this.eventDescription;
     this.newEvent.start = this.eventStartDate;
     this.newEvent.end = this.eventEndDate;
+    this.newEvent.allDay = this.eventWholeDay;
 
     console.log(this.newEvent);
     this.calendarService.addCalendarEvent(this.newEvent);
 
     this.cancel();
+  }
+
+  blur() {
+    let active = document.activeElement as HTMLElement;
+    active.blur();
   }
 }

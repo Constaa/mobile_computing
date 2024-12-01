@@ -250,3 +250,8 @@ body {
 .seminar {
   color: 'green'
 }
+
+.timeDisabled {
+  pointer-events: none;
+  cursor: not-allowed !important;
+}

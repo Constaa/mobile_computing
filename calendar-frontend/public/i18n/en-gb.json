@@ -19,7 +19,8 @@
         "startTime": "Start Time",
         "endTime": "End Time",
         "cancel": "Cancel",
-        "addEvent": "Add event"
+        "addEvent": "Add event",
+        "wholeDay": "Entire day"
     },
     "calendar": {
         "category": "Category",

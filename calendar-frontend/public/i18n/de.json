@@ -19,7 +19,8 @@
         "startTime": "Startzeit",
         "endTime": "Endzeit",
         "cancel": "Abbrechen",
-        "addEvent": "Termin hinzufügen"
+        "addEvent": "Termin hinzufügen",
+        "wholeDay": "Ganztägig"
     },
     "calendar": {
         "category": "Kategorie",
