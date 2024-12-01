@@ -14,11 +14,10 @@ import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
 import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [MatToolbarModule, MatSelectModule, MatIconModule, MatCardModule, MatSlideToggleModule, MatButtonModule, FormsModule, TranslateModule, RouterLink],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'app-header',
+    imports: [MatToolbarModule, MatSelectModule, MatIconModule, MatCardModule, MatSlideToggleModule, MatButtonModule, FormsModule, TranslateModule, RouterLink],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   darkMode: boolean = false;

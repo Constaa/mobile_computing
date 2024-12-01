@@ -13,12 +13,11 @@ import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { CalendarService } from '../../shared/services/calendar.service';
 
 @Component({
-  selector: 'app-add-event-dialog',
-  standalone: true,
-  imports: [MatDialogModule, MatButtonModule, MatIconModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, ReactiveFormsModule, TranslateModule],
-  providers: [provideNativeDateAdapter()],
-  templateUrl: './add-event-dialog.component.html',
-  styleUrl: './add-event-dialog.component.scss'
+    selector: 'app-add-event-dialog',
+    imports: [MatDialogModule, MatButtonModule, MatIconModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, ReactiveFormsModule, TranslateModule],
+    providers: [provideNativeDateAdapter()],
+    templateUrl: './add-event-dialog.component.html',
+    styleUrl: './add-event-dialog.component.scss'
 })
 export class AddEventDialogComponent {
   readonly dialogRef = inject(MatDialogRef<AdminComponent>);
