@@ -30,7 +30,7 @@ export class AdminComponent {
   }
   
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddEventDialogComponent, { autoFocus: false });
+    const dialogRef = this.dialog.open(AddEventDialogComponent, { autoFocus: false, minWidth: "60%" });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

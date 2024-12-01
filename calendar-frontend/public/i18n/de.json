@@ -29,7 +29,9 @@
         "thursday": "Donnerstag",
         "friday": "Freitag",
         "saturday": "Samstag",
-        "sunday": "Sonntag"
+        "sunday": "Sonntag",
+        "minParticipants": "Mindestteilnehmerzahl",
+        "maxParticipants": "Maximale Teilnehmerzahl"
     },
     "calendar": {
         "category": "Kategorie",

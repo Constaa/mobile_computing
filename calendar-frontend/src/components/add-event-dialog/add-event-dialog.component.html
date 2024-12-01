@@ -1,7 +1,7 @@
 <div class="mat-app-background dialog-container">
     <h2>{{'add-event-dialog.addEvent' | translate}}</h2>
 
-    <mat-dialog-content>
+    <mat-dialog-content style="overflow-y: scroll;">
         <mat-form-field color="accent" class="fullWidth">
             <mat-label>{{'add-event-dialog.title' | translate}}</mat-label>
             <input matInput [(ngModel)]="eventTitle">
@@ -15,10 +15,28 @@
         </mat-form-field>
 
         <br>
+        <mat-divider></mat-divider>
+        <br>
 
-        <mat-checkbox [(ngModel)]="eventRecurring" (click)="blur();">
-            {{'add-event-dialog.recurring' | translate}}
-        </mat-checkbox>
+        <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
+            <mat-form-field color="accent">
+                <mat-label>{{'add-event-dialog.minParticipants' | translate}}</mat-label>
+                <input matInput [(ngModel)]="eventMinParticipants">
+            </mat-form-field>
+            <mat-form-field color="accent">
+                <mat-label>{{'add-event-dialog.maxParticipants' | translate}}</mat-label>
+                <input matInput [(ngModel)]="eventMaxParticipants">
+            </mat-form-field>
+        </div>
+
+        <mat-divider></mat-divider>
+        <br>
+
+        <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
+            <mat-checkbox [(ngModel)]="eventRecurring" (click)="blur();">
+                {{'add-event-dialog.recurring' | translate}}
+            </mat-checkbox>
+        </div>
 
         @if(eventRecurring) {
         <br>
@@ -37,44 +55,54 @@
         }
 
         <br>
+        <mat-divider></mat-divider>
+        <br>
 
-        <mat-checkbox [(ngModel)]="eventWholeDay" (click)="blur();">
-            {{'add-event-dialog.wholeDay' | translate}}
-        </mat-checkbox>
+        <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
+            <mat-checkbox [(ngModel)]="eventWholeDay" (click)="blur();">
+                {{'add-event-dialog.wholeDay' | translate}}
+            </mat-checkbox>
+        </div>
 
         <br>
 
-        <mat-form-field color="accent">
-            <mat-label>{{'add-event-dialog.startDate' | translate}}</mat-label>
-            <input matInput [matDatepicker]="datepickerStart" [(ngModel)]="eventStartDate">
-            <mat-datepicker #datepickerStart />
-            <mat-datepicker-toggle [for]="datepickerStart" matSuffix />
-        </mat-form-field>
+        <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
+            <mat-form-field color="accent">
+                <mat-label>{{'add-event-dialog.startDate' | translate}}</mat-label>
+                <input matInput [matDatepicker]="datepickerStart" [(ngModel)]="eventStartDate">
+                <mat-datepicker #datepickerStart />
+                <mat-datepicker-toggle [for]="datepickerStart" matSuffix />
+            </mat-form-field>
 
-        <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
-            <mat-label>{{'add-event-dialog.startTime' | translate}}</mat-label>
-            <input matInput [matTimepicker]="timepickerStart" [(ngModel)]="eventStartDate"
-                [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay" [class.timeDisabled]="eventWholeDay">
-            <mat-timepicker #timepickerStart />
-            <mat-timepicker-toggle [for]="timepickerStart" matSuffix [class.timeDisabled]="eventWholeDay" />
-        </mat-form-field>
+            <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
+                <mat-label>{{'add-event-dialog.startTime' | translate}}</mat-label>
+                <input matInput [matTimepicker]="timepickerStart" [(ngModel)]="eventStartDate"
+                    [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay"
+                    [class.timeDisabled]="eventWholeDay">
+                <mat-timepicker #timepickerStart />
+                <mat-timepicker-toggle [for]="timepickerStart" matSuffix [class.timeDisabled]="eventWholeDay" />
+            </mat-form-field>
+        </div>
 
         <br>
 
-        <mat-form-field color="accent">
-            <mat-label>{{'add-event-dialog.endDate' | translate}}</mat-label>
-            <input matInput [matDatepicker]="datepickerEnd" [(ngModel)]="eventEndDate">
-            <mat-datepicker #datepickerEnd />
-            <mat-datepicker-toggle [for]="datepickerEnd" matSuffix />
-        </mat-form-field>
+        <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
+            <mat-form-field color="accent">
+                <mat-label>{{'add-event-dialog.endDate' | translate}}</mat-label>
+                <input matInput [matDatepicker]="datepickerEnd" [(ngModel)]="eventEndDate">
+                <mat-datepicker #datepickerEnd />
+                <mat-datepicker-toggle [for]="datepickerEnd" matSuffix />
+            </mat-form-field>
 
-        <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
-            <mat-label>{{'add-event-dialog.endTime' | translate}}</mat-label>
-            <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate"
-                [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay" [class.timeDisabled]="eventWholeDay">
-            <mat-timepicker #timepickerEnd />
-            <mat-timepicker-toggle [for]="timepickerEnd" matSuffix [class.timeDisabled]="eventWholeDay" />
-        </mat-form-field>
+            <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
+                <mat-label>{{'add-event-dialog.endTime' | translate}}</mat-label>
+                <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate"
+                    [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay"
+                    [class.timeDisabled]="eventWholeDay">
+                <mat-timepicker #timepickerEnd />
+                <mat-timepicker-toggle [for]="timepickerEnd" matSuffix [class.timeDisabled]="eventWholeDay" />
+            </mat-form-field>
+        </div>
     </mat-dialog-content>
 
     <mat-dialog-actions align="center">

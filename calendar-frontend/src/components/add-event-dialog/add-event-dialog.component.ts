@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { CalendarService } from '../../shared/services/calendar.service';
 import { MatTimepickerModule } from '@angular/material/timepicker';
+import { MatDividerModule } from '@angular/material/divider';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -20,7 +21,7 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-event-dialog',
-  imports: [MatDialogModule, MatButtonModule, MatIconModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatNativeDateModule, ReactiveFormsModule, TranslateModule, MatTimepickerModule, MatCheckboxModule],
+  imports: [MatDialogModule, MatButtonModule, MatIconModule, FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatDividerModule, MatSelectModule, MatNativeDateModule, ReactiveFormsModule, TranslateModule, MatTimepickerModule, MatCheckboxModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-event-dialog.component.html',
   styleUrl: './add-event-dialog.component.scss'
@@ -48,6 +49,8 @@ export class AddEventDialogComponent implements OnInit {
   eventWholeDay: boolean = false;
   eventRecurring: boolean = false;
   eventDaysOfWeek: number[] = [];
+  eventMinParticipants: number = 0;
+  eventMaxParticipants: number = 0;
 
   constructor(private calendarService: CalendarService, private store: Store) { }
 
@@ -78,6 +81,8 @@ export class AddEventDialogComponent implements OnInit {
     this.newEvent.end = this.eventEndDate;
     this.newEvent.allDay = this.eventWholeDay;
     this.newEvent.daysOfWeek = this.eventDaysOfWeek;
+    this.newEvent.minParticipants = this.eventMinParticipants;
+    this.newEvent.maxParticipants = this.eventMaxParticipants;
 
     if (this.eventRecurring) {
       this.newEvent.startRecur = this.eventStartDate;
