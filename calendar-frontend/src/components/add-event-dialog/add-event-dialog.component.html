@@ -2,16 +2,16 @@
     <h2>{{'add-event-dialog.addEvent' | translate}}</h2>
 
     <mat-dialog-content>
-        <mat-form-field color="accent">
+        <mat-form-field color="accent" class="fullWidth">
             <mat-label>{{'add-event-dialog.title' | translate}}</mat-label>
             <input matInput [(ngModel)]="eventTitle">
         </mat-form-field>
 
         <br>
 
-        <mat-form-field color="accent">
+        <mat-form-field color="accent" class="fullWidth">
             <mat-label>{{'add-event-dialog.description' | translate}}</mat-label>
-            <textarea matInput [(ngModel)]="eventDescription"></textarea>
+            <textarea matInput [(ngModel)]="eventDescription" rows="5"></textarea>
         </mat-form-field>
 
         <br>
@@ -51,7 +51,7 @@
             <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate"
                 [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay" [class.timeDisabled]="eventWholeDay">
             <mat-timepicker #timepickerEnd />
-            <mat-timepicker-toggle [for]="timepickerEnd" matSuffix [class.timeDisabled]="eventWholeDay"/>
+            <mat-timepicker-toggle [for]="timepickerEnd" matSuffix [class.timeDisabled]="eventWholeDay" />
         </mat-form-field>
     </mat-dialog-content>
 
