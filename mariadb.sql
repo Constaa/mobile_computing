@@ -32,24 +32,23 @@ CREATE TABLE IF NOT EXISTS `calendarevents` (
   `minParticipants` int(11) DEFAULT 0,
   `maxParticipants` int(11) DEFAULT 0,
   `_year` year(4) DEFAULT NULL,
+  `startRecur` timestamp NULL DEFAULT NULL,
+  `endRecur` timestamp NULL DEFAULT NULL,
+  `startTime` time DEFAULT NULL,
+  `endTime` time DEFAULT NULL,
   KEY `Schlüssel 1` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Exportiere Daten aus Tabelle mobilecomputing.calendarevents: ~3 rows (ungefähr)
-INSERT INTO `calendarevents` (`Id`, `allDay`, `start`, `end`, `daysOfWeek`, `title`, `className`, `description`, `minParticipants`, `maxParticipants`, `_year`) VALUES
-	(5, 0, '2024-11-19 15:09:26', '2024-11-19 17:09:26', '', 'First event', '', 'Description1', 0, 0, '2024'),
-	(6, 1, '2024-11-23 15:09:26', '2024-11-23 17:09:26', '', 'Second event', '', 'Description2', 0, 0, '2024'),
-	(7, 0, '2024-11-23 15:09:26', '2024-11-25 17:09:26', '', 'Third event', '', '', 0, 0, '2024'),
-	(8, 0, '2024-11-25 15:37:54', '2024-11-25 18:37:54', '', 'Fourth event', '', '', 0, 0, '2024');
-
--- Exportiere Struktur von Trigger mobilecomputing.insert_year_trigger
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
-DELIMITER //
-CREATE TRIGGER `insert_year_trigger` BEFORE INSERT ON `calendarevents` FOR EACH ROW BEGIN
-SET NEW._year = YEAR(NEW.start);
-END//
-DELIMITER ;
-SET SQL_MODE=@OLDTMP_SQL_MODE;
+-- Exportiere Daten aus Tabelle mobilecomputing.calendarevents: ~7 rows (ungefähr)
+INSERT INTO `calendarevents` (`Id`, `allDay`, `start`, `end`, `daysOfWeek`, `title`, `className`, `description`, `minParticipants`, `maxParticipants`, `_year`, `startRecur`, `endRecur`, `startTime`, `endTime`) VALUES
+	(5, 0, '2024-11-19 15:09:26', '2024-11-19 17:09:26', '', 'First event', '', 'Description1', 0, 0, '2024', NULL, NULL, NULL, NULL),
+	(6, 1, '2024-11-23 15:09:26', '2024-11-23 17:09:26', '', 'Second event', '', 'Description2', 0, 0, '2024', NULL, NULL, NULL, NULL),
+	(7, 0, '2024-11-23 15:09:26', '2024-11-25 17:09:26', '', 'Third event', '', '', 0, 0, '2024', NULL, NULL, NULL, NULL),
+	(8, 0, '2024-11-25 15:37:54', '2024-11-25 18:37:54', '', 'Fourth event', '', '', 0, 0, '2024', NULL, NULL, NULL, NULL),
+	(9, 0, '2024-11-29 13:00:00', '2024-11-30 16:00:00', '', 'New Test event', '', 'Description for test event', 0, 0, '2024', NULL, NULL, NULL, NULL),
+	(10, 0, '2024-12-02 05:00:00', '2024-12-03 11:00:00', '', 'Test neu', '', 'Beschreibung', 0, 0, '2024', NULL, NULL, NULL, NULL),
+	(11, 0, '2024-12-03 05:00:00', '2024-12-03 06:00:00', '', 'Neues Test event', '', 'das ist die Beschreibung', 0, 0, '2024', NULL, NULL, NULL, NULL),
+	(14, 0, '2024-12-02 05:00:00', '2024-12-23 09:00:00', '1,2', 'Wiederholung', '', 'Test1', 0, 0, '2024', '2024-12-02 05:00:00', '2024-12-23 09:00:00', '06:00:00', '10:00:00');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
