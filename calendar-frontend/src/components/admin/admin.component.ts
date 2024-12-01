@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class AdminComponent {
   readonly dialog = inject(MatDialog);
-  isLoggedIn = true;
+  isLoggedIn = false;
   username = '';
   password = '';
 
