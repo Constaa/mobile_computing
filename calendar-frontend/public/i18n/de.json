@@ -14,9 +14,10 @@
     "add-event-dialog": {
         "title": "Titel",
         "description": "Beschreibung",
-        "timespan": "Zeitraum",
-        "errorStart": "Invalider Startzeitpunkt",
-        "errorEnd": "Invalider Endzeitpunkt",
+        "startDate": "Startdatum",
+        "endDate": "Enddatum",
+        "startTime": "Startzeit",
+        "endTime": "Endzeit",
         "cancel": "Abbrechen",
         "addEvent": "Termin hinzufügen"
     },

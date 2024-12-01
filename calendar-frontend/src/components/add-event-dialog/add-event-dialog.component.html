@@ -2,8 +2,6 @@
     <h2>{{'add-event-dialog.addEvent' | translate}}</h2>
 
     <mat-dialog-content>
-        <!--TODO: Add handling of the following inputs-->
-        <!-- <form class="new-event-form"> -->
         <mat-form-field color="accent">
             <mat-label>{{'add-event-dialog.title' | translate}}</mat-label>
             <input matInput [(ngModel)]="eventTitle">
@@ -18,14 +16,14 @@
 
         <br>
 
-        <mat-form-field color="accent">
+        <!--<mat-form-field color="accent">
             <mat-label>{{'add-event-dialog.timespan' | translate}}</mat-label>
             <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
                 <input matStartDate formControlName="start" [(ngModel)]="eventStartDate">
                 <input matEndDate formControlName="end" [(ngModel)]="eventEndDate">
-            </mat-date-range-input>
-            <!--TODO: handle different locales-->
-            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            </mat-date-range-input>-->
+        <!--TODO: handle different locales-->
+        <!--<mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
 
@@ -35,8 +33,39 @@
             @if (range.controls.end.hasError('matEndDateInvalid')) {
             <mat-error>{{'add-event-dialog.errorEnd' | translate}}</mat-error>
             }
+        </mat-form-field>-->
+
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.startDate' | translate}}</mat-label>
+            <input matInput [matDatepicker]="datepickerStart" [(ngModel)]="eventStartDate">
+            <mat-datepicker #datepickerStart />
+            <mat-datepicker-toggle [for]="datepickerStart" matSuffix />
         </mat-form-field>
-        <!-- </form> -->
+
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.startTime' | translate}}</mat-label>
+            <input matInput [matTimepicker]="timepickerStart" [(ngModel)]="eventStartDate"
+                [ngModelOptions]="{updateOn: 'blur'}">
+            <mat-timepicker #timepickerStart />
+            <mat-timepicker-toggle [for]="timepickerStart" matSuffix />
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.endDate' | translate}}</mat-label>
+            <input matInput [matDatepicker]="datepickerEnd" [(ngModel)]="eventEndDate">
+            <mat-datepicker #datepickerEnd />
+            <mat-datepicker-toggle [for]="datepickerEnd" matSuffix />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.endTime' | translate}}</mat-label>
+            <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate"
+                [ngModelOptions]="{updateOn: 'blur'}">
+            <mat-timepicker #timepickerEnd />
+            <mat-timepicker-toggle [for]="timepickerEnd" matSuffix />
+        </mat-form-field>
     </mat-dialog-content>
 
     <mat-dialog-actions align="center">

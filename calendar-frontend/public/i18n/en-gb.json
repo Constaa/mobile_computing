@@ -14,9 +14,10 @@
     "add-event-dialog": {
         "title": "Title",
         "description": "Description",
-        "timespan": "Timespan",
-        "errorStart": "Invalid start date",
-        "errorEnd": "Invalid end date",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "startTime": "Start Time",
+        "endTime": "End Time",
         "cancel": "Cancel",
         "addEvent": "Add event"
     },

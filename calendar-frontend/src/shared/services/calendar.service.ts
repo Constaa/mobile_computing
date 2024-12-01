@@ -17,7 +17,7 @@ export class CalendarService {
    * @returns Observable list of CalendarEvent objects that represent the event data received from the backend.
    */
   getCalendarEvents(): Observable<CalendarEvent[]> {
-    return this.httpClient.get(this.apiUrl + "/getEvents", { observe: 'response' }).pipe(map(x =>
+    return this.httpClient.get(`${this.apiUrl}/getEvents`, { observe: 'response' }).pipe(map(x =>
       //Map the received data to a list of CalendarEvents for further handling.
       <CalendarEvent[]>x.body
     ));
