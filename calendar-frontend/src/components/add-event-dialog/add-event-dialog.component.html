@@ -16,6 +16,28 @@
 
         <br>
 
+        <mat-checkbox [(ngModel)]="eventRecurring" (click)="blur();">
+            {{'add-event-dialog.recurring' | translate}}
+        </mat-checkbox>
+
+        @if(eventRecurring) {
+        <br>
+        <mat-form-field class="fullWidth" color="accent">
+            <mat-label>{{'add-event-dialog.days' | translate}}</mat-label>
+            <mat-select multiple (selectionChange)="setRecurringDays($event)">
+                <mat-option [value]=1>{{'add-event-dialog.monday' | translate}}</mat-option>
+                <mat-option [value]=2>{{'add-event-dialog.tuesday' | translate}}</mat-option>
+                <mat-option [value]=3>{{'add-event-dialog.wednesday' | translate}}</mat-option>
+                <mat-option [value]=4>{{'add-event-dialog.thursday' | translate}}</mat-option>
+                <mat-option [value]=5>{{'add-event-dialog.friday' | translate}}</mat-option>
+                <mat-option [value]=6>{{'add-event-dialog.saturday' | translate}}</mat-option>
+                <mat-option [value]=0>{{'add-event-dialog.sunday' | translate}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        }
+
+        <br>
+
         <mat-checkbox [(ngModel)]="eventWholeDay" (click)="blur();">
             {{'add-event-dialog.wholeDay' | translate}}
         </mat-checkbox>

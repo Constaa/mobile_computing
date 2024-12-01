@@ -22,6 +22,23 @@ export class CalendarEffects {
             this.action$.pipe(ofType(CalendarActions.LoadCalendarEvents),
                 mergeMap(action =>
                     this.calendarService.getCalendarEvents().pipe(map((data: CalendarEvent[]) => {
+                        data.forEach(element => {
+                            if (element.startTime && element.startTime != "") {
+                                let tempDate: Date = new Date(Date.UTC(0));
+                                let timeInfo = element.startTime.split(':');
+                                tempDate.setHours(tempDate.getHours() + parseInt(timeInfo[0]));
+                                tempDate.setMinutes(tempDate.getMinutes() + parseInt(timeInfo[1]));
+                                element.startTime = tempDate.toTimeString();
+                            }
+
+                            if (element.endTime && element.endTime != "") {
+                                let tempDate: Date = new Date(Date.UTC(0));
+                                let timeInfo = element.endTime.split(':');
+                                tempDate.setHours(tempDate.getHours() + parseInt(timeInfo[0]));
+                                tempDate.setMinutes(tempDate.getMinutes() + parseInt(timeInfo[1]));
+                                element.endTime = tempDate.toTimeString();
+                            }
+                        });
                         return CalendarActions.ReceivedCalendarEvents({ payload: data })
                     }))
                 )));

@@ -8,5 +8,9 @@ export interface CalendarEvent {
     description: string,
     minParticipants: number,
     maxParticipants: number,
-    className: string
+    className: string,
+    startRecur?: Date,
+    endRecur?: Date,
+    startTime?: string,
+    endTime?: string
 }

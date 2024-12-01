@@ -20,7 +20,16 @@
         "endTime": "End Time",
         "cancel": "Cancel",
         "addEvent": "Add event",
-        "wholeDay": "Entire day"
+        "wholeDay": "Entire day",
+        "recurring": "Recurring",
+        "days": "Days",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
     },
     "calendar": {
         "category": "Category",

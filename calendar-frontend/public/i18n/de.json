@@ -20,7 +20,16 @@
         "endTime": "Endzeit",
         "cancel": "Abbrechen",
         "addEvent": "Termin hinzufügen",
-        "wholeDay": "Ganztägig"
+        "wholeDay": "Ganztägig",
+        "recurring": "Wiederholung",
+        "days": "Tage",
+        "monday": "Montag",
+        "tuesday": "Dienstag",
+        "wednesday": "Mittwoch",
+        "thursday": "Donnerstag",
+        "friday": "Freitag",
+        "saturday": "Samstag",
+        "sunday": "Sonntag"
     },
     "calendar": {
         "category": "Kategorie",
