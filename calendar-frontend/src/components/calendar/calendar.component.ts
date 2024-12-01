@@ -89,12 +89,23 @@ export class CalendarComponent implements OnInit {
     //Assign the defined options to the calendar
     this.calendarComponent.options = this.calendarOptions;
     this.calendarComponent.options.eventClick = function (info) {
+      let wholeDayDE: string;
+      let wholeDayEN: string;
+
+      if (!info.event.end) {
+        wholeDayDE = "ganztägig";
+        wholeDayEN = "entire day";
+      } else {
+        wholeDayDE = info.event.end?.toLocaleString();
+        wholeDayEN = info.event.end?.toLocaleString();
+      }
+
       //Hard-code translations as the http loader used in ngx-translate is not yet iitialized completly at this point.
       if (info.view.calendar.getOption('locale') == "de") {
-        alert(`Titel: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}`);
+        alert(`Titel: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}\r\nStart: ${info.event.start?.toLocaleString()}\r\nEnde: ${wholeDayDE}\r\nKategorie: ${info.event.classNames}\r\nMindestteilnehmerzahl: ${info.event.extendedProps["minParticipants"]}\r\nMaximale Teilnehmer Anzahl: ${info.event.extendedProps["maxParticipants"]}`);
       } else {
         //Use generall 'else' statement instead if 'else if' to use english as a de facto default when the current locale is unexpected. 
-        alert(`Title: ${info.event.title}\r\Description: ${info.event.extendedProps["description"]}`);
+        alert(`Title: ${info.event.title}\r\Description: ${info.event.extendedProps["description"]}\r\nStart: ${info.event.start?.toLocaleString()}\r\nEnd: ${wholeDayEN}\r\n Categorie: ${info.event.classNames}\r\nMin. Participants: ${info.event.extendedProps["minParticipants"]}\r\nMax. Participants: ${info.event.extendedProps["maxParticipants"]}`);
       }
     }
   }
