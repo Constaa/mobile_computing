@@ -14,6 +14,17 @@
             <textarea matInput [(ngModel)]="eventDescription" rows="5"></textarea>
         </mat-form-field>
 
+      <br>
+
+      <mat-form-field color="accent">
+        <mat-label>{{'add-event-dialog.className' | translate}}</mat-label>
+        <mat-select [(ngModel)]="eventClassName">
+          <mat-option value="Kurs">Kurs</mat-option>
+          <mat-option value="Seminar">Seminar</mat-option>
+          <mat-option value="Konferenz">Konferenz</mat-option>
+        </mat-select>
+      </mat-form-field>
+
         <br>
         <mat-divider></mat-divider>
         <br>

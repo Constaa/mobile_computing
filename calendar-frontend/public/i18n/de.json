@@ -14,6 +14,7 @@
     "add-event-dialog": {
         "title": "Titel",
         "description": "Beschreibung",
+        "className": "Kategorie",
         "startDate": "Startdatum",
         "endDate": "Enddatum",
         "startTime": "Startzeit",

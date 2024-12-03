@@ -4,9 +4,9 @@
         <mat-label>{{'calendar.category' | translate}}</mat-label>
         <mat-select [ngModel]="currentCategory" (selectionChange)="setCategory($event)">
             <mat-option value="all" selected>Alle</mat-option>
-            <mat-option value="kurs">Kurs</mat-option>
-            <mat-option value="seminar">Seminar</mat-option>
-            <mat-option value="konferenz">Konferenz</mat-option>
+            <mat-option value="Kurs">Kurs</mat-option>
+            <mat-option value="Seminar">Seminar</mat-option>
+            <mat-option value="Konferenz">Konferenz</mat-option>
         </mat-select>
     </mat-form-field>
 
@@ -15,6 +15,7 @@
         <mat-label>{{'calendar.search' | translate}}</mat-label>
         <input matInput [(ngModel)]="searchQuery" placeholder="Suchbegriff eingeben" />
     </mat-form-field>
+
 
     <!-- Suchen-Button -->
     <button mat-raised-button color="primary" (click)="applyFilters()">

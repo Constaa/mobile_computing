@@ -44,6 +44,7 @@ export class AddEventDialogComponent implements OnInit {
   };
   eventTitle: string = "";
   eventDescription: string = "";
+  eventClassName: string = "";
   eventStartDate!: Date;
   eventEndDate!: Date;
   eventWholeDay: boolean = false;
@@ -77,6 +78,7 @@ export class AddEventDialogComponent implements OnInit {
   addCalendarEvent() {
     this.newEvent.title = this.eventTitle;
     this.newEvent.description = this.eventDescription;
+    this.newEvent.className = this.eventClassName;
     this.newEvent.start = this.eventStartDate;
     this.newEvent.end = this.eventEndDate;
     this.newEvent.allDay = this.eventWholeDay;
