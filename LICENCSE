@@ -1,29 +1,21 @@
+# LICENSE
 
-All licenses in this repository are copyrighted by their respective authors.
+This project is licensed under the following terms:
 
-Everything else is released under CC0.
+## Academic and Non-Commercial Use
+You are permitted to use, modify, and distribute this project **exclusively for academic or non-commercial purposes**, provided that you:
+- **Cite this project** in your publications, presentations, or derivative works.
+- Include proper attribution to the original authors.
 
-------------------------------------------------------------------------------
+## Commercial Use
+**Commercial use of this project is strictly prohibited**. This includes, but is not limited to:
+- Selling the project or derivative works.
+- Using the project as part of a commercial product or service.
 
-No Copyright
+## Citation
+If you use this project in your work, please cite it as follows:
+```
+UNSERE NAMEN - Mobile Computing (2024)
+```
 
-The person who associated a work with this deed has dedicated the work to the
-public domain by waiving all of his or her rights to the work worldwide under
-copyright law, including all related and neighboring rights,
-to the extent allowed by law.
-
-You can copy, modify, distribute and perform the work, even for commercial
-purposes, all without asking permission. See Other Information below.
-
-Other Information:
-
-    * In no way are the patent or trademark rights of any person affected
-    by CC0, nor are the rights that other persons may have in the work or in
-    how the work is used, such as publicity or privacy rights.
-
-    * Unless expressly stated otherwise, the person who associated a work with
-    this deed makes no warranties about the work, and disclaims liability for
-    all uses of the work, to the fullest extent permitted by applicable law.
-
-    * When using or citing the work, you should not imply endorsement
-    by the author or the affirmer.
+For any questions or clarifications, please contact [your contact email or GitHub Issues].
