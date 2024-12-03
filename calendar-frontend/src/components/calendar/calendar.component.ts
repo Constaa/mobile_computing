@@ -98,14 +98,20 @@ export class CalendarComponent implements OnInit {
   }
 
   applyFilters(): void {
-    if (this.currentCategory === 'all') {
-      this.filteredEvents = this.calendarEvents;
-    } else {
-      this.filteredEvents = this.calendarEvents.filter(event => event.className && event.className.includes(this.currentCategory));
+    this.filteredEvents = this.calendarEvents;
+
+    if (this.currentCategory !== 'all') {
+      this.filteredEvents = this.filteredEvents.filter(event => event.className && event.className.includes(this.currentCategory));
     }
+
+    if (this.searchQuery.trim() !== '') {
+      this.filteredEvents = this.filteredEvents.filter(event => event.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    }
+
     if (this.calendarComponent) {
       this.calendarComponent.events = <EventInput>this.filteredEvents;
     }
+
     console.log('Aktuelle Filter:', {
       category: this.currentCategory,
       searchQuery: this.searchQuery,
