@@ -259,3 +259,18 @@ body {
 .fullWidth {
   width: 100%;
 }
+
+.errorSnackbar {
+  --mdc-snackbar-container-color: red !important;
+  --mdc-snackbar-supporting-text-color: white !important;
+}
+
+.warningSnackbar {
+  --mdc-snackbar-container-color: #ffcc00 !important;
+  --mdc-snackbar-supporting-text-color: black !important;
+}
+
+.successSnackbar {
+  --mdc-snackbar-container-color: green !important;
+  --mdc-snackbar-supporting-text-color: white !important;
+}

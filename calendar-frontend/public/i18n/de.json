@@ -37,5 +37,9 @@
         "category": "Kategorie",
         "search": "Suchbegriff eingeben",
         "searchButton": "Filter anwenden"
+    },
+    "service": {
+        "addEventSuccess": "Termin erfolgreich hinzugefügt",
+        "badRequest": "Termindaten sind fehlerhaft"
     }
 }

@@ -3,6 +3,8 @@ import { map, Observable } from 'rxjs';
 import { CalendarEvent } from '../models/calendarEvent';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class CalendarService {
   private apiUrl: string = environment.baseUrl;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private translate: TranslateService) { }
 
   /**
    * Function for getting calendar event data from the backend.
@@ -26,6 +28,29 @@ export class CalendarService {
   addCalendarEvent(event: CalendarEvent) {
     //TODO: Add callback listener to check successful execution
     console.log("service");
-    return this.httpClient.post<CalendarEvent>(this.apiUrl + "/addEvent", event, { observe: 'response' }).subscribe(x => console.log(x));
+    return this.httpClient.post<CalendarEvent>(this.apiUrl + "/addEvent", event, { observe: 'response' }).pipe(map(x => {
+      if (x.status == 200) {
+        this.openSnackbar(this.translate.instant('service.addEventSuccess'), "successSnackbar");
+        return;
+      }
+      else if (x.status == 400) {
+        setTimeout(
+          () =>
+            this.openSnackbar(this.translate.instant('service.badRequest'), "errorSnackbar")
+        );
+        return;
+      }
+      this.openSnackbar(x.statusText, "errorSnackbar");
+      return;
+    })).subscribe();
+  }
+
+  openSnackbar(message: string, type: string) {
+    var snackBarConfig: MatSnackBarConfig = {
+      horizontalPosition: "end",
+      duration: 7000,
+      panelClass: type
+    }
+    this._snackBar.open(message, "", snackBarConfig);
   }
 }

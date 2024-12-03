@@ -37,5 +37,9 @@
         "category": "Category",
         "search": "Enter search term",
         "searchButton": "Apply filters"
+    },
+    "service": {
+        "addEventSuccess": "Event added successfully",
+        "badRequest": "Event data is invalid"
     }
 }
