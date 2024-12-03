@@ -66,6 +66,16 @@ export class CalendarComponent implements OnInit {
     this.store.dispatch(CalendarActions.LoadCalendarEvents());
   }
 
+  /**
+   * Diese Methode wird nach der Initialisierung der Ansicht aufgerufen.
+   * Sie setzt die Optionen des Kalender-Components und definiert eine Funktion,
+   * die beim Klicken auf ein Ereignis im Kalender ausgeführt wird.
+   * 
+   * Die Funktion zeigt ein Alert-Fenster mit den Details des angeklickten Ereignisses an.
+   * Die angezeigten Informationen variieren je nach eingestellter Sprache (Deutsch oder Englisch).
+   * 
+   * @method ngAfterViewInit
+   */
   ngAfterViewInit() {
     this.calendarComponent.options = this.calendarOptions;
     this.calendarComponent.options.eventClick = function (info) {
@@ -88,15 +98,35 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  /**
+   * Setzt die Sprache des Kalenders.
+   *
+   * @param languageCode - Der Sprachcode, der für den Kalender verwendet werden soll.
+   */
   setCalendarLanguage(languageCode: string) {
     this.calendarOptions.locale = languageCode;
   }
 
+  
+  /**
+   * Setzt die aktuelle Kategorie basierend auf der Auswahl des Benutzers und wendet die Filter an.
+   *
+   * @param event - Das Auswahlereignis von MatSelect, das die neue Kategorie enthält.
+   */
   setCategory(event: MatSelectChange) {
     this.currentCategory = event.value;
     this.applyFilters();
   }
 
+
+  /**
+ * Wendet Filter auf die Kalenderereignisse basierend auf der aktuellen Kategorie und Suchanfrage an.
+ * 
+ * - Filtert Ereignisse nach Kategorie, wenn die aktuelle Kategorie nicht 'all' ist.
+ * - Filtert Ereignisse nach Suchanfrage, wenn die Suchanfrage nicht leer ist.
+ * - Aktualisiert die Kalenderkomponente mit den gefilterten Ereignissen.
+ * - Protokolliert die aktuellen Filtereinstellungen in der Konsole.
+ */
   applyFilters(): void {
     this.filteredEvents = this.calendarEvents;
 

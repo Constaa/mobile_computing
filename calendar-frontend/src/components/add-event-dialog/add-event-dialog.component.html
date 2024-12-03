@@ -1,6 +1,12 @@
 <div class="mat-app-background dialog-container">
     <h2>{{'add-event-dialog.addEvent' | translate}}</h2>
 
+    <!--
+        Diese Komponente stellt einen Dialog zum Hinzufügen eines neuen Ereignisses dar.
+        Der Dialog enthält ein Eingabefeld für den Titel des Ereignisses.
+        Die Beschriftung des Eingabefeldes wird durch den 'translate'-Pipe übersetzt.
+        Das Eingabefeld ist mit dem 'eventTitle'-Modell über ngModel gebunden.
+    -->
     <mat-dialog-content style="overflow-y: scroll;">
         <mat-form-field color="accent" class="fullWidth">
             <mat-label>{{'add-event-dialog.title' | translate}}</mat-label>
@@ -9,6 +15,12 @@
 
         <br>
 
+        <!--
+            Diese Komponente stellt ein Formularfeld zur Verfügung, um eine Ereignisbeschreibung einzugeben.
+            - mat-form-field: Ein Material Design Formularfeld mit Akzentfarbe und voller Breite.
+            - mat-label: Ein Beschriftungselement, das den Text aus der Übersetzungspipeline 'add-event-dialog.description' anzeigt.
+            - textarea: Ein Eingabefeld für mehrzeiligen Text, das mit dem ngModel 'eventDescription' verbunden ist und 5 Zeilen hoch ist.
+        -->
         <mat-form-field color="accent" class="fullWidth">
             <mat-label>{{'add-event-dialog.description' | translate}}</mat-label>
             <textarea matInput [(ngModel)]="eventDescription" rows="5"></textarea>
@@ -16,6 +28,13 @@
 
       <br>
 
+    <!--
+        Diese Komponente stellt ein Formularfeld zur Auswahl einer Veranstaltungsart bereit.
+        Es verwendet Angular Material-Komponenten wie mat-form-field, mat-label und mat-select.
+        Die verfügbaren Optionen sind "Kurs", "Seminar" und "Konferenz".
+        Die ausgewählte Option wird über das ngModel an die Variable eventClassName gebunden.
+        Der Label-Text wird mithilfe des translate-Pipes internationalisiert.
+    -->
       <mat-form-field color="accent">
         <mat-label>{{'add-event-dialog.className' | translate}}</mat-label>
         <mat-select [(ngModel)]="eventClassName">
@@ -29,6 +48,12 @@
         <mat-divider></mat-divider>
         <br>
 
+        <!--
+            Diese Komponente enthält zwei Eingabefelder für die minimale und maximale Teilnehmeranzahl eines Events.
+            Beide Eingabefelder verwenden Angular Material Form Fields und sind mit ngModel an die Variablen `eventMinParticipants` und `eventMaxParticipants` gebunden.
+            Die Labels der Eingabefelder werden durch den `translate` Pipe übersetzt.
+            Die Eingabefelder sind in einem flex Container zentriert und haben einen Abstand von 5vw zueinander.
+        -->
         <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
             <mat-form-field color="accent">
                 <mat-label>{{'add-event-dialog.minParticipants' | translate}}</mat-label>
@@ -43,6 +68,14 @@
         <mat-divider></mat-divider>
         <br>
 
+        <!-- 
+            Diese HTML-Struktur enthält ein div-Element mit der Klasse "fullWidth", 
+            das einen flexbox-Container darstellt. Innerhalb dieses Containers befindet 
+            sich ein mat-checkbox-Element, das an das ngModel "eventRecurring" gebunden ist. 
+            Beim Klicken auf das Kontrollkästchen wird die Methode "blur()" aufgerufen. 
+            Der Text des Kontrollkästchens wird durch den 'add-event-dialog.recurring' 
+            Schlüssel übersetzt.
+        -->
         <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
             <mat-checkbox [(ngModel)]="eventRecurring" (click)="blur();">
                 {{'add-event-dialog.recurring' | translate}}
@@ -51,6 +84,14 @@
 
         @if(eventRecurring) {
         <br>
+        <!--
+            Diese Komponente ist ein Formularfeld, das es dem Benutzer ermöglicht, mehrere Wochentage auszuwählen.
+            Es verwendet Angular Material-Komponenten wie mat-form-field und mat-select.
+            Die mat-select-Komponente hat die Eigenschaft "multiple", die es ermöglicht, mehrere Optionen auszuwählen.
+            Jede mat-option repräsentiert einen Wochentag, wobei der Wert von 0 (Sonntag) bis 6 (Samstag) reicht.
+            Die Beschriftungen der Optionen werden durch den 'translate'-Pipe übersetzt.
+            Wenn sich die Auswahl ändert, wird die Methode setRecurringDays($event) aufgerufen.
+        -->
         <mat-form-field class="fullWidth" color="accent">
             <mat-label>{{'add-event-dialog.days' | translate}}</mat-label>
             <mat-select multiple (selectionChange)="setRecurringDays($event)">
@@ -69,6 +110,13 @@
         <mat-divider></mat-divider>
         <br>
 
+        <!--
+            Diese HTML-Struktur enthält eine Checkbox, die verwendet wird, um ein Ereignis als Ganztagesereignis zu markieren.
+            - Die Checkbox ist an das ngModel "eventWholeDay" gebunden, um den Status des Kontrollkästchens zu verfolgen.
+            - Beim Klicken auf die Checkbox wird die Methode "blur()" aufgerufen.
+            - Der Text der Checkbox wird durch den Übersetzungs-Filter "translate" lokalisiert und angezeigt.
+            - Die Checkbox ist in einem div-Element zentriert, das Flexbox verwendet, um den Inhalt horizontal zu zentrieren und einen Abstand von 5vw zwischen den Elementen zu schaffen.
+        -->
         <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
             <mat-checkbox [(ngModel)]="eventWholeDay" (click)="blur();">
                 {{'add-event-dialog.wholeDay' | translate}}
@@ -78,6 +126,12 @@
         <br>
 
         <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
+            <!--
+                Dieses Formularfeld ist für die Auswahl des Startdatums eines Ereignisses.
+                Es verwendet Angular Material-Komponenten wie mat-form-field, matInput, mat-datepicker und mat-datepicker-toggle.
+                Der Label-Text wird mithilfe des 'translate'-Pipes internationalisiert.
+                Das ausgewählte Datum wird im eventStartDate-Attribut des Datenmodells gespeichert.
+            -->
             <mat-form-field color="accent">
                 <mat-label>{{'add-event-dialog.startDate' | translate}}</mat-label>
                 <input matInput [matDatepicker]="datepickerStart" [(ngModel)]="eventStartDate">
@@ -85,6 +139,18 @@
                 <mat-datepicker-toggle [for]="datepickerStart" matSuffix />
             </mat-form-field>
 
+            <!--
+                Diese Komponente stellt ein Formularfeld zur Verfügung, um eine Startzeit für ein Ereignis auszuwählen.
+                - `color="accent"`: Setzt die Akzentfarbe des Formularfelds.
+                - `[class.timeDisabled]="eventWholeDay"`: Fügt die CSS-Klasse `timeDisabled` hinzu, wenn `eventWholeDay` wahr ist.
+                - `<mat-label>`: Beschriftung des Formularfelds, die durch den `translate`-Pipe übersetzt wird.
+                - `<input matInput>`: Eingabefeld für die Startzeit, das mit dem `matTimepicker` verbunden ist.
+                - `[(ngModel)]="eventStartDate"`: Zweibindige Datenbindung an die Eigenschaft `eventStartDate`.
+                - `[ngModelOptions]="{updateOn: 'blur'}"`: Aktualisiert das Modell nur, wenn das Eingabefeld den Fokus verliert.
+                - `[disabled]="eventWholeDay"`: Deaktiviert das Eingabefeld, wenn `eventWholeDay` wahr ist.
+                - `<mat-timepicker>`: Zeitwähler-Komponente.
+                - `<mat-timepicker-toggle>`: Schaltfläche zum Öffnen des Zeitwählers.
+            -->
             <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
                 <mat-label>{{'add-event-dialog.startTime' | translate}}</mat-label>
                 <input matInput [matTimepicker]="timepickerStart" [(ngModel)]="eventStartDate"
@@ -98,6 +164,14 @@
         <br>
 
         <div class="fullWidth" style="display: flex; justify-content: center; gap: 5vw;">
+            <!--
+                Diese Komponente stellt ein Formularfeld zur Auswahl eines Enddatums für ein Ereignis bereit.
+                - <mat-form-field>: Ein Material Design Formularfeld mit der Akzentfarbe.
+                - <mat-label>: Ein Beschriftungselement, das den übersetzten Textschlüssel 'add-event-dialog.endDate' anzeigt.
+                - <input matInput [matDatepicker]="datepickerEnd" [(ngModel)]="eventEndDate">: Ein Eingabefeld, das den Material Datepicker verwendet und an das Modell 'eventEndDate' gebunden ist.
+                - <mat-datepicker #datepickerEnd />: Der Datepicker, der mit dem Eingabefeld verbunden ist.
+                - <mat-datepicker-toggle [for]="datepickerEnd" matSuffix />: Ein Umschaltelement, das den Datepicker öffnet.
+            -->
             <mat-form-field color="accent">
                 <mat-label>{{'add-event-dialog.endDate' | translate}}</mat-label>
                 <input matInput [matDatepicker]="datepickerEnd" [(ngModel)]="eventEndDate">
@@ -105,6 +179,21 @@
                 <mat-datepicker-toggle [for]="datepickerEnd" matSuffix />
             </mat-form-field>
 
+            <!--
+                Diese Komponente stellt ein Formularfeld zur Verfügung, um die Endzeit eines Ereignisses auszuwählen.
+                - `color="accent"`: Setzt die Akzentfarbe des Formularfelds.
+                - `[class.timeDisabled]="eventWholeDay"`: Fügt die CSS-Klasse `timeDisabled` hinzu, wenn `eventWholeDay` wahr ist.
+                - `<mat-label>`: Beschriftung des Eingabefelds, die durch den `translate`-Pipe übersetzt wird.
+                - `<input matInput>`: Eingabefeld für die Endzeit des Ereignisses.
+                    - `[matTimepicker]="timepickerEnd"`: Verknüpft das Eingabefeld mit dem Timepicker.
+                    - `[(ngModel)]="eventEndDate"`: Zweibindige Datenbindung für das Enddatum des Ereignisses.
+                    - `[ngModelOptions]="{updateOn: 'blur'}"`: Aktualisiert das Modell nur, wenn das Eingabefeld den Fokus verliert.
+                    - `[disabled]="eventWholeDay"`: Deaktiviert das Eingabefeld, wenn `eventWholeDay` wahr ist.
+                - `<mat-timepicker>`: Timepicker-Komponente.
+                - `<mat-timepicker-toggle>`: Schaltfläche zum Öffnen des Timepickers.
+                    - `[for]="timepickerEnd"`: Verknüpft die Schaltfläche mit dem Timepicker.
+                    - `matSuffix`: Platziert die Schaltfläche am Ende des Eingabefelds.
+            -->
             <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
                 <mat-label>{{'add-event-dialog.endTime' | translate}}</mat-label>
                 <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate"
@@ -117,10 +206,28 @@
     </mat-dialog-content>
 
     <mat-dialog-actions align="center">
+        <!-- 
+            Button zum Abbrechen des Hinzufügens eines neuen Ereignisses.
+            - mat-fab: Angular Material Floating Action Button.
+            - extended: Erweitert die Schaltfläche, um Text anzuzeigen.
+            - color="primary": Setzt die Farbe der Schaltfläche auf die primäre Farbe.
+            - (click)="cancel()": Ruft die cancel()-Methode auf, wenn die Schaltfläche angeklickt wird.
+            - <mat-icon>: Zeigt ein Symbol an (in diesem Fall ein "close"-Symbol).
+            - {{'add-event-dialog.cancel' | translate}}: Zeigt den übersetzten Text für "Abbrechen" an.
+        -->
         <button mat-fab extended color="primary" (click)="cancel()">
             <mat-icon fontSet="material-icons">close</mat-icon>
             {{'add-event-dialog.cancel' | translate}}
         </button>
+        <!--
+            Diese Schaltfläche erstellt ein neues Kalenderevent.
+            - mat-fab: Verwendet das Floating Action Button (FAB) Design von Angular Material.
+            - extended: Erweitert die Schaltfläche, um Text anzuzeigen.
+            - color="warn": Setzt die Farbe der Schaltfläche auf "warn" (Warnfarbe).
+            - (click)="addCalendarEvent();": Ruft die Methode addCalendarEvent() auf, wenn die Schaltfläche angeklickt wird.
+            - <mat-icon>: Zeigt ein Kalendersymbol an.
+            - {{'add-event-dialog.addEvent' | translate}}: Zeigt den übersetzten Text für "addEvent" aus dem add-event-dialog an.
+        -->
         <button mat-fab extended color="warn" (click)="addCalendarEvent();">
             <mat-icon fontSet="material-icons-outlined">calendar_add_on</mat-icon>
             {{'add-event-dialog.addEvent' | translate}}

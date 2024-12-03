@@ -1,4 +1,23 @@
 <span style="display: flex; align-items: center; gap: 15px;">
+    <!--
+        Diese Komponente stellt ein Formularfeld mit einer Auswahlbox (Dropdown) zur Verfügung,
+        um eine Kategorie auszuwählen. Das Formularfeld verwendet Angular Material-Komponenten.
+        
+        - mat-form-field: Ein Container für Formularelemente mit Material Design.
+        - mat-icon: Ein Symbol, das als Präfix im Formularfeld angezeigt wird.
+        - mat-label: Ein Beschriftungstext für das Formularfeld, der mit einem Übersetzungs- 
+          Pipe versehen ist.
+        - mat-select: Eine Auswahlbox, die die aktuelle Kategorie (currentCategory) anzeigt 
+          und eine Methode (setCategory) aufruft, wenn sich die Auswahl ändert.
+        - mat-option: Optionen innerhalb der Auswahlbox, die verschiedene Kategorien darstellen.
+        
+        Attribute:
+        - color="accent": Setzt die Akzentfarbe des Formularfelds.
+        - style="margin-top: 15px;": Fügt einen oberen Rand von 15 Pixeln hinzu.
+        - [ngModel]="currentCategory": Bindet die Auswahlbox an die Variable currentCategory.
+        - (selectionChange)="setCategory($event)": Ruft die Methode setCategory auf, wenn sich 
+          die Auswahl ändert.
+    -->
     <mat-form-field color="accent" style="margin-top: 15px;">
         <mat-icon matPrefix fontSet="material-icons">filter_alt</mat-icon>
         <mat-label>{{'calendar.category' | translate}}</mat-label>
@@ -10,14 +29,22 @@
         </mat-select>
     </mat-form-field>
 
-    <!-- Suchfeld -->
+    <!-- 
+        Diese Komponente stellt ein Suchfeld bereit, das in einem Angular-Material-Formularfeld eingebettet ist.
+        - color="accent": Setzt die Akzentfarbe für das Formularfeld.
+        - style="flex-grow: 1; margin-top: 15px;": Stellt sicher, dass das Formularfeld flexibel wächst und einen oberen Rand von 15px hat.
+        - <mat-label>: Beschriftung des Suchfeldes, die durch den 'translate'-Pipe übersetzt wird.
+        - <input matInput>: Eingabefeld, das an die Variable 'searchQuery' gebunden ist und einen Platzhaltertext "Suchbegriff eingeben" anzeigt.
+    -->
     <mat-form-field color="accent" style="flex-grow: 1; margin-top: 15px;">
         <mat-label>{{'calendar.search' | translate}}</mat-label>
         <input matInput [(ngModel)]="searchQuery" placeholder="Suchbegriff eingeben" />
     </mat-form-field>
 
-
-    <!-- Suchen-Button -->
+    <!-- 
+        Diese Schaltfläche ist eine erhöhte Schaltfläche mit der primären Farbe, die beim Klicken die Methode applyFilters() aufruft.
+        Der Text der Schaltfläche wird durch den Übersetzungs-Schlüssel 'calendar.searchButton' bestimmt.
+    -->
     <button mat-raised-button color="primary" (click)="applyFilters()">
         <mat-label>{{'calendar.searchButton' | translate}}</mat-label>
     </button>
