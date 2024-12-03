@@ -15,7 +15,9 @@ You are permitted to use, modify, and distribute this project **exclusively for 
 ## Citation
 If you use this project in your work, please cite it as follows:
 ```
-UNSERE NAMEN - Mobile Computing (2024)
+Marc & Fabian & Jonas Dietsche- Mobile Computing (2024)
 ```
 
-For any questions or clarifications, please contact [your contact email or GitHub Issues].
+For any questions or clarifications, please contact:
+
+jonas.dietsche@gmx.net
