@@ -255,10 +255,28 @@ body {
 
 .course {
   background-color: red;
+  color: white;
+}
+
+.course>.fc-event-main {
+  color: white;
+}
+
+.course .fc-h-event {
+  color: white;
 }
 
 .seminar {
   background-color: green;
+  color: white;
+}
+
+.seminar>.fc-event-main {
+  color: white;
+}
+
+.seminar .fc-h-event {
+  color: white;
 }
 
 .timeDisabled {

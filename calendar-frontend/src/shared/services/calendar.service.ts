@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
 import { CalendarEvent } from '../models/calendarEvent';
 
 @Injectable({
@@ -12,7 +14,7 @@ import { CalendarEvent } from '../models/calendarEvent';
 export class CalendarService {
   private apiUrl: string = environment.baseUrl;
 
-  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private translate: TranslateService) { }
+  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private translate: TranslateService, private store: Store) { }
 
   /**
    * Function for getting calendar event data from the backend.
@@ -54,6 +56,10 @@ export class CalendarService {
       if (x.status == 200) {
         //Show confirmation notification on successfull execution.
         this.openSnackbar(this.translate.instant('service.deleteEventSuccess'), "successSnackbar");
+        //Reload the current events after deletion
+        setTimeout(() => {
+          this.store.dispatch(CalendarActions.LoadCalendarEvents());
+        }, 2000);
         return;
       }
       else if (x.status == 400) {
@@ -61,9 +67,17 @@ export class CalendarService {
           () =>
             this.openSnackbar(this.translate.instant('service.badRequest'), "errorSnackbar")
         );
+        //Reload the current events after deletion
+        setTimeout(() => {
+          this.store.dispatch(CalendarActions.LoadCalendarEvents());
+        }, 2000);
         return;
       }
       this.openSnackbar(x.statusText, "errorSnackbar");
+      //Reload the current events after deletion
+      setTimeout(() => {
+        this.store.dispatch(CalendarActions.LoadCalendarEvents());
+      }, 2000);
       return;
     })).subscribe();
   }

@@ -69,10 +69,6 @@ export class AdminComponent implements OnInit {
     this.deleteDisabled = true;
     //Call the service function for accessing the backend delete function.
     this.service.deleteCalendarEvent(id);
-    //Reload the current events after deletion
-    setTimeout(() => {
-      this.store.dispatch(CalendarActions.LoadCalendarEvents());
-    }, 2000);
   }
 
   /**
