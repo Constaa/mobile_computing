@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../components/header/header.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { TranslateService } from '@ngx-translate/core';
-import { CalendarComponent } from '../components/calendar/calendar.component';
-import { Store } from '@ngrx/store';
-import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
-import * as CalendarSelectors from '../shared/store/calendar/calendar.selectors';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
+import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
+import { CalendarComponent } from '../components/calendar/calendar.component';
+import { HeaderComponent } from '../components/header/header.component';
+import * as CalendarSelectors from '../shared/store/calendar/calendar.selectors';
 
 @Component({
   selector: 'app-root',

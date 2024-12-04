@@ -1,4 +1,4 @@
-import { createSelector, createFeatureSelector } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { CalendarState } from './calendar.reducer';
 
 //Setup for the Selectors of the ngrx/store library

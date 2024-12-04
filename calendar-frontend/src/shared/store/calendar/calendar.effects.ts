@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { CalendarEvent } from './../../models/calendarEvent'
 import { CalendarService } from '../../services/calendar.service';
-import * as CalendarActions from './calendar.actions'
-import { Action } from '@ngrx/store';
+import { CalendarEvent } from './../../models/calendarEvent';
+import * as CalendarActions from './calendar.actions';
 
 //Setup for the Effects of the ngrx/effects library
 

@@ -1,16 +1,16 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import { routes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { CalendarEffects } from '../shared/store/calendar/calendar.effects'
-import { reducers } from '../shared/store';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { reducers } from '../shared/store';
+import { CalendarEffects } from '../shared/store/calendar/calendar.effects';
+import { routes } from './app.routes';
 import { ErrorInterceptor } from './error-interceptor';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>

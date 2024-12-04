@@ -1,23 +1,23 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { AdminComponent } from '../admin/admin.component';
-import { MatIconModule } from '@angular/material/icon';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DateAdapter, MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { CalendarService } from '../../shared/services/calendar.service';
-import { MatTimepickerModule } from '@angular/material/timepicker';
-import { MatDividerModule } from '@angular/material/divider';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-add-event-dialog',

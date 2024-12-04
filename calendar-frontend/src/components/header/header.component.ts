@@ -1,19 +1,18 @@
 import { Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
-import { AppComponent } from '../../app/app.component';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Store } from '@ngrx/store';
-import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
-import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
+import { AppComponent } from '../../app/app.component';
+import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
 
 @Component({
   selector: 'app-header',

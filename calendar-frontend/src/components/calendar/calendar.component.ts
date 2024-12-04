@@ -1,23 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, EventInput } from '@fullcalendar/core/index.js';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import listPlugin from '@fullcalendar/list';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import multiMonthPlugin from '@fullcalendar/multimonth';
-import deLocale from '@fullcalendar/core/locales/de';
-import enLocale from '@fullcalendar/core/locales/en-gb';
-import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
-import { CalendarEvent } from '../../shared/models/calendarEvent';
-import { Store } from '@ngrx/store';
-import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
-import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions, EventInput } from '@fullcalendar/core/index.js';
+import deLocale from '@fullcalendar/core/locales/de';
+import enLocale from '@fullcalendar/core/locales/en-gb';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
+import multiMonthPlugin from '@fullcalendar/multimonth';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { Store } from '@ngrx/store';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
+import { CalendarEvent } from '../../shared/models/calendarEvent';
+import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
+import * as CalendarSelectors from '../../shared/store/calendar/calendar.selectors';
 
 @Component({
   selector: 'app-calendar',
