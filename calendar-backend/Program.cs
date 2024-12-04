@@ -57,7 +57,7 @@ namespace calendar_backend
             #region routes
             app.MapGet("api/getEvents", (HttpContext httpContext) =>
             {
-                ; List<CalendarEvent> list = [];
+                List<CalendarEvent> list = [];
 
                 try
                 {
