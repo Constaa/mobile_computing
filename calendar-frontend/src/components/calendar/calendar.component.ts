@@ -26,6 +26,7 @@ import * as CalendarSelectors from '../../shared/store/calendar/calendar.selecto
   styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent implements OnInit {
+  //Set a reference to the calendar component in the HTML template.
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
 
   calendarEvents$!: Observable<CalendarEvent[]>;
@@ -39,6 +40,7 @@ export class CalendarComponent implements OnInit {
   isScreenSizeSmall: boolean = false;
   headerToolbar!: HTMLDivElement;
 
+  //Set the default calendar configuration
   calendarOptions: CalendarOptions = {
     initialView: 'multiMonthYear',
     plugins: [dayGridPlugin, multiMonthPlugin, timeGridPlugin, listPlugin],
@@ -52,41 +54,43 @@ export class CalendarComponent implements OnInit {
     contentHeight: "670px"
   };
 
-  constructor(private store: Store, private translate: TranslateService) { }
+  constructor(private store: Store) { }
 
+  /**
+   * Internal Angular function that is called once when the component is being accessed.
+   */
   ngOnInit(): void {
+    //Set references to the store for getting the event data that is received from the backend and saved in the store
     this.calendarEvents$ = this.store.select(CalendarSelectors.selectCalendarEvents);
     this.calendarEvents$.subscribe(x => {
       this.calendarEvents = x;
       this.applyFilters(); // Apply initial filter
     });
 
+    //Handle language changes by subscribing to changes in the corresponding store sections.
     this.calendarLanguage$ = this.store.select(CalendarSelectors.selectCurrentUserLanguage);
     this.calendarLanguage$.subscribe(x => {
       this.calendarLanguage = x;
       this.setCalendarLanguage(x);
     })
 
+    //Dispatch a store action to initially load the calendar events.
     this.store.dispatch(CalendarActions.LoadCalendarEvents());
   }
 
   /**
-   * Diese Methode wird nach der Initialisierung der Ansicht aufgerufen.
-   * Sie setzt die Optionen des Kalender-Components und definiert eine Funktion,
-   * die beim Klicken auf ein Ereignis im Kalender ausgeführt wird.
-   * 
-   * Die Funktion zeigt ein Alert-Fenster mit den Details des angeklickten Ereignisses an.
-   * Die angezeigten Informationen variieren je nach eingestellter Sprache (Deutsch oder Englisch).
-   * 
-   * @method ngAfterViewInit
+   * Internal Angular function that is calles once the site view (HTML DOM) has been constructed.
    */
   ngAfterViewInit() {
+    //Set the calendar options on the calendar reference after the HTML DOM has been initialized
     this.calendarComponent.options = this.calendarOptions;
+    //Add the click event handler for events which is used for displaying a information popup when clicking on an event.
     this.calendarComponent.options.eventClick = function (info) {
       let wholeDayDE: string;
       let wholeDayEN: string;
 
       if (!info.event.end) {
+        //Set this translation information manually as the translation service is not yet initialized at this application state.
         wholeDayDE = "ganztägig";
         wholeDayEN = "entire day";
       } else {
@@ -94,6 +98,7 @@ export class CalendarComponent implements OnInit {
         wholeDayEN = info.event.end?.toLocaleString();
       }
 
+      //Set this translation information manually as the translation service is not yet initialized at this application state.
       if (info.view.calendar.getOption('locale') == "de") {
         alert(`Titel: ${info.event.title}\r\nBeschreibung: ${info.event.extendedProps["description"]}\r\nStart: ${info.event.start?.toLocaleString()}\r\nEnde: ${wholeDayDE}\r\nKategorie: ${info.event.classNames.join(', ')}\r\nMindestteilnehmerzahl: ${info.event.extendedProps["minParticipants"]}\r\nMaximale Teilnehmer Anzahl: ${info.event.extendedProps["maxParticipants"]}`);
       } else {
@@ -101,11 +106,15 @@ export class CalendarComponent implements OnInit {
       }
     }
 
+    //Get a reference to the calendar tool bar that contains different calendar controls.
     this.headerToolbar = document.getElementsByClassName("fc-header-toolbar")[0] as HTMLDivElement;
+
+    //Setup event listener for detecting changes in screen size.
     const checkScreenSize = () => document.body.offsetWidth < 1281;
     const screenSizeChanged$ = fromEvent(window, 'resize').pipe(debounceTime(500), map(checkScreenSize));
     this.isScreenSizeSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
     this.isScreenSizeSmall$.subscribe(x => {
+      //Change different calendar options depending if the screen is detected as small or not.
       this.isScreenSizeSmall = x;
       if (this.isScreenSizeSmall) {
         this.calendarOptions.contentHeight = "520px";
@@ -123,52 +132,43 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Setzt die Sprache des Kalenders.
-   *
-   * @param languageCode - Der Sprachcode, der für den Kalender verwendet werden soll.
+   * Function for setting the current language used in the calendar display.
+   * @param languageCode The language code that should be set.
    */
   setCalendarLanguage(languageCode: string) {
+    //Set the calendar locale option to handle calendar translation
     this.calendarOptions.locale = languageCode;
   }
 
-
   /**
-   * Setzt die aktuelle Kategorie basierend auf der Auswahl des Benutzers und wendet die Filter an.
+   * Function for setting the filter category.
    *
-   * @param event - Das Auswahlereignis von MatSelect, das die neue Kategorie enthält.
+   * @param event - MatSelectChange event that is sent when the selection of the control changes.
    */
   setCategory(event: MatSelectChange) {
     this.currentCategory = event.value;
     this.applyFilters();
   }
 
-
   /**
- * Wendet Filter auf die Kalenderereignisse basierend auf der aktuellen Kategorie und Suchanfrage an.
- * 
- * - Filtert Ereignisse nach Kategorie, wenn die aktuelle Kategorie nicht 'all' ist.
- * - Filtert Ereignisse nach Suchanfrage, wenn die Suchanfrage nicht leer ist.
- * - Aktualisiert die Kalenderkomponente mit den gefilterten Ereignissen.
- * - Protokolliert die aktuellen Filtereinstellungen in der Konsole.
- */
+   * Function for applying filters to the currently displayed events.
+   */
   applyFilters(): void {
     this.filteredEvents = this.calendarEvents;
 
+    //Handles filters based on the category select control.
     if (this.currentCategory !== 'all') {
       this.filteredEvents = this.filteredEvents.filter(event => event.className && event.className.includes(this.currentCategory));
     }
 
+    //Handles filters based on the entered search string.
     if (this.searchQuery.trim() !== '') {
       this.filteredEvents = this.filteredEvents.filter(event => event.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
     }
 
     if (this.calendarComponent) {
+      //Assing the filtered event to be displayed by the calendar component.
       this.calendarComponent.events = <EventInput>this.filteredEvents;
     }
-
-    console.log('Aktuelle Filter:', {
-      category: this.currentCategory,
-      searchQuery: this.searchQuery,
-    });
   }
 }

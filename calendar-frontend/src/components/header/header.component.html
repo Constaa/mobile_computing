@@ -1,6 +1,9 @@
+<!--Main toolbar displaying different controls-->
 <mat-toolbar id="navbar" class="mat-elevation-z5" color="primary" style="position: fixed; top:0; z-index: 5;">
+    <!--Show a menu button if the screen size is detected as small.-->
     @if(isScreenSizeSmall){
     <span style="margin-right: 3vw;">
+        <!--Clickable button for opening the menu.-->
         <button mat-mini-fab (click)="openTemplateDialog();">
             <mat-icon fonrSet="material-icons">menu</mat-icon>
         </button>
@@ -10,7 +13,9 @@
     <span style="font-size:large; font-weight: bold;">Calendar App</span>
 
 
+    <!--If the screen size is not small, display the different route controls in the toolbar.-->
     @if(!isScreenSizeSmall){
+    <!--Clickable buttons for changing the currently displayed compoennt.-->
     <span style="margin-left: 1vw;">
         <button mat-raised-button routerLink="/calendar">{{'header.calendar' | translate}}</button>
     </span>
@@ -20,6 +25,7 @@
 
     <span style="flex: 1 1 auto;"></span>
 
+    <!--Controls for language selection.-->
     <span style="padding-top: 20px">
         <mat-icon fontSet="material-icons">translate</mat-icon>&nbsp;
         <mat-form-field color="accent">
@@ -31,6 +37,7 @@
         </mat-form-field>
     </span>
 
+    <!--Controls for dark mode setting.-->
     <mat-card appearance="outlined" style="margin-left: 30px;">
         <mat-card-content>
             <span style="display: flex; align-items: center;">
@@ -45,6 +52,7 @@
     }
 </mat-toolbar>
 
+<!--If the screen size is detected as small, show a bottom toolbar containing the route controls.-->
 @if(isScreenSizeSmall){
 <mat-toolbar id="navbar" class="mat-elevation-z5" color="primary"
     style="position: fixed; bottom: 0; z-index: 5; text-align: center; align-items: center; justify-content: center;">
@@ -60,10 +68,12 @@
 </mat-toolbar>
 }
 
+<!--Template for the menu dialog that can be opened.-->
 <ng-template #menuDialog>
     <div class="mat-app-background dialog-container">
         <h2>{{'header.menu' | translate}}</h2>
 
+        <!--Controls for language selection.-->
         <mat-dialog-content style="overflow-y: scroll; text-align: center;">
             <span style="padding-top: 20px">
                 <mat-icon fontSet="material-icons">translate</mat-icon>&nbsp;
@@ -76,6 +86,7 @@
                 </mat-form-field>
             </span>
 
+            <!--Controls for dark mode setting.-->
             <mat-card appearance="outlined" style="width: fit-content; margin: auto">
                 <mat-card-content>
                     <span style="display: flex; align-items: center;">

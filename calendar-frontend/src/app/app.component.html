@@ -1,12 +1,15 @@
 <body id="root-element" class="mat-app-background" style="overflow:auto;" [@themeChange]="darkMode ? true: false">
   <div id="app-container">
+    <!--Add header component to app-->
     <app-header></app-header>
     <br>
+    <!--the router outlet display the coponent currently selected via the route.-->
     <div id="router-container">
       <router-outlet></router-outlet>
     </div>
   </div>
 
+  <!--Hide help button on small screen sizes as it is handles by the header componen tin this case.-->
   @if(!isScreenSizeSmall){
   <button mat-fab style="position: fixed; bottom: 1vh; left: 1vw; z-index: 500;" (click)="openHelp()" color="primary">
     <mat-icon fontSet="material-icons" style="cursor: pointer;">help</mat-icon>

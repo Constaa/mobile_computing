@@ -21,6 +21,10 @@ export class AdminComponent {
   username = '';
   password = '';
 
+  /**
+   * Function for handling the login.
+   * Currently only for demonstration purposes.
+   */
   login() {
     if (this.username === 'admin' && this.password === 'password') {
       this.isLoggedIn = true;
@@ -29,6 +33,9 @@ export class AdminComponent {
     }
   }
 
+  /**
+   * Open the add-event-dialog dialog where new events can be added to the database.
+   */
   openDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialogComponent, { autoFocus: false, minWidth: "60%" });
   }

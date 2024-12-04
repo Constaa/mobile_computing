@@ -17,6 +17,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: Http
   new TranslateHttpLoader(http, './i18n/', '.json');
 
 export const appConfig: ApplicationConfig = {
+  //Import all needed functionalities.
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(withInterceptors([ErrorInterceptor])), provideAnimationsAsync(), importProvidersFrom(StoreModule.forRoot(reducers), EffectsModule.forRoot(CalendarEffects), [TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

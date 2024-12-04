@@ -27,6 +27,7 @@ import { AdminComponent } from '../admin/admin.component';
   styleUrl: './add-event-dialog.component.scss'
 })
 export class AddEventDialogComponent implements OnInit {
+  //Setup needed variables
   private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
   readonly dialogRef = inject(MatDialogRef<AdminComponent>);
 
@@ -56,63 +57,38 @@ export class AddEventDialogComponent implements OnInit {
   constructor(private calendarService: CalendarService, private store: Store) { }
 
   /**
-   * Diese Methode wird beim Initialisieren der Komponente aufgerufen.
-   * Sie abonniert die aktuelle Sprache des Benutzers aus dem Store und setzt die Kalender-Sprache entsprechend.
-   * 
-   * - Abonniert `calendarLanguage$` aus dem Store, um die aktuelle Benutzersprache zu erhalten.
-   * - Aktualisiert die lokale Variable `calendarLanguage` mit dem abonnierten Wert.
-   * - Setzt das Locale des Adapters auf die ersten zwei Zeichen der Sprache, um die Anzeige von AM/PM im englischen Locale zu korrigieren.
+   * Internal Angular function that is called once when the component is being accessed.
    */
   ngOnInit(): void {
     this.calendarLanguage$ = this.store.select(CalendarSelectors.selectCurrentUserLanguage);
     this.calendarLanguage$.subscribe(x => {
       this.calendarLanguage = x;
-      //Verwenden Sie nur die ersten beiden Zeichen als Locale, um die Anzeige von AM/PM im englischen Locale zu korrigieren
+      //Use only the first to characters to correctly set the locale for the date and time pickers and handle AM/PM in corresponding locales.
       this._adapter.setLocale(x.substring(0, 2));
     })
   }
 
   /**
-   * Schließt den Dialog ohne Änderungen zu speichern.
+   * Function for closing the dialog without saving the event to the database.
    */
   cancel(): void {
     this.dialogRef.close();
   }
 
   /**
-   * Setzt die wiederkehrenden Tage für ein Ereignis.
+   * Function for setting the recurring days of a recurring event.
    *
-   * @param event - Das MatSelectChange-Ereignis, das die ausgewählten Tage der Woche enthält.
+   * @param event - MatSelectChange event that is sent when the selection of the control changes.
    */
   setRecurringDays(event: MatSelectChange) {
     this.eventDaysOfWeek = event.value;
   }
 
   /**
-   * Fügt ein neues Kalenderereignis hinzu.
-   * 
-   * Diese Methode sammelt die Informationen aus den entsprechenden Feldern
-   * und erstellt ein neues Ereignisobjekt, das dann dem Kalenderdienst
-   * hinzugefügt wird. Wenn das Ereignis wiederkehrend ist, werden auch die
-   * Start- und Enddaten für die Wiederholung gesetzt.
-   * 
-   * Felder:
-   * - title: Der Titel des Ereignisses.
-   * - description: Die Beschreibung des Ereignisses.
-   * - className: Die CSS-Klasse des Ereignisses.
-   * - start: Das Startdatum des Ereignisses.
-   * - end: Das Enddatum des Ereignisses.
-   * - allDay: Gibt an, ob das Ereignis den ganzen Tag dauert.
-   * - daysOfWeek: Die Wochentage, an denen das Ereignis stattfindet.
-   * - minParticipants: Die minimale Anzahl von Teilnehmern.
-   * - maxParticipants: Die maximale Anzahl von Teilnehmern.
-   * - startRecur: Das Startdatum der Wiederholung (falls wiederkehrend).
-   * - endRecur: Das Enddatum der Wiederholung (falls wiederkehrend).
-   * 
-   * Nach dem Hinzufügen des Ereignisses wird die Methode `cancel` aufgerufen,
-   * um das Formular zurückzusetzen.
+   * Function for adding a new event to the database.
    */
   addCalendarEvent() {
+    //Set the values of the new event
     this.newEvent.title = this.eventTitle;
     this.newEvent.description = this.eventDescription;
     this.newEvent.className = this.eventClassName;
@@ -129,15 +105,16 @@ export class AddEventDialogComponent implements OnInit {
       //startTime and endTime are handled in backend based on the times of these date objects
     }
 
-    console.log(this.newEvent);
+    //Send the data to the backend via the corresponding function in the service.
     this.calendarService.addCalendarEvent(this.newEvent);
 
+    //Close the dialog.
     this.cancel();
   }
 
   /**
-   * Diese Methode entfernt den Fokus vom aktuell aktiven Element.
-   * Sie ruft die `blur`-Methode auf dem aktuell fokussierten HTML-Element auf.
+   * Function for removing the focus on the currently active element.
+   * Needed to remove the focus ripple effect of Material checkbox elements that would be stuck otherwise.
    */
   blur() {
     let active = document.activeElement as HTMLElement;

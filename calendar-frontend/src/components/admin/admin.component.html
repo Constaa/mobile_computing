@@ -5,6 +5,7 @@
       <h1>Login</h1>
     </mat-card-header>
     <mat-card-content>
+      <!--Login form-->
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <mat-form-field appearance="outline" class="full-width" color="accent">
           <mat-label>{{'admin.username' | translate}}</mat-label>
@@ -27,6 +28,7 @@
 </div>
 } @else if(isLoggedIn){
 <div class="appointment-container">
+  <!--Controls for opening the add-event-dialog-->
   <mat-card appearance="outlined" class="center">
     <mat-card-header class="center-content">
       <h1>{{'admin.manageEvents' | translate}}</h1>

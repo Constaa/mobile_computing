@@ -27,17 +27,22 @@ export class AppComponent implements OnInit {
   isScreenSizeSmall: boolean = false;
 
   constructor(public overlayContainer: OverlayContainer, private translate: TranslateService, private store: Store) {
+    //Setup the initial config of the translation.
     this.translate.addLangs(['de', 'en-gb']);
     this.translate.setDefaultLang('de');
     this.translate.use('de');
   }
 
+  /**
+   * Internal Angular function that is called once when the component is being accessed.
+   */
   ngOnInit() {
     this.currentLanguage$ = this.store.select(CalendarSelectors.selectCurrentUserLanguage);
     this.currentLanguage$.subscribe(x => {
       this.translate.use(x);
     });
 
+    //Setup event listener for detecting changes in screen size
     const checkScreenSize = () => document.body.offsetWidth < 1281;
     const screenSizeChanged$ = fromEvent(window, 'resize').pipe(debounceTime(500), map(checkScreenSize));
     this.isScreenSizeSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
@@ -46,6 +51,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /**
+   * Internal Angular function that is calles once the site view (HTML DOM) has been constructed.
+   */
   ngAfterContentInit() {
     //Handle dark mode after first component initialization
     this.rootElement = document.getElementById("root-element") as HTMLBodyElement;
@@ -90,6 +98,9 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * Function for opening the help document in a separate tab.
+   */
   openHelp() {
     var currentLang = this.translate.currentLang;
     var currentLocation = window.location.origin;

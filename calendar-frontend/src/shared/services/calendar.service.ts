@@ -25,11 +25,15 @@ export class CalendarService {
     ));
   }
 
+  /**
+   * Function for adding a new event to the database.
+   * @param event CalendarEvent object that represents the new event that should be added to the database.
+   * @returns Subscription to the received response from the backend.
+   */
   addCalendarEvent(event: CalendarEvent) {
-    //TODO: Add callback listener to check successful execution
-    console.log("service");
     return this.httpClient.post<CalendarEvent>(this.apiUrl + "/addEvent", event, { observe: 'response' }).pipe(map(x => {
       if (x.status == 200) {
+        //Show confirmation notification on successfull execution.
         this.openSnackbar(this.translate.instant('service.addEventSuccess'), "successSnackbar");
         return;
       }
@@ -45,12 +49,20 @@ export class CalendarService {
     })).subscribe();
   }
 
+  /**
+   * Function for displaying status notifications.
+   * @param message The message that should be displayed in the notification
+   * @param type The type of the notification. The type is added as a CSS class to the notification for styling.
+   */
   openSnackbar(message: string, type: string) {
+    //Setup config of notification.
     var snackBarConfig: MatSnackBarConfig = {
       horizontalPosition: "end",
       duration: 7000,
       panelClass: type
     }
+
+    //Display notification.
     this._snackBar.open(message, "", snackBarConfig);
   }
 }
