@@ -4,7 +4,7 @@
     <mat-card-header class="center-content">
       <h1>Login</h1>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="center-content">
       <!--Login form-->
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <mat-form-field appearance="outline" class="full-width" color="accent">
@@ -27,7 +27,7 @@
   </mat-card>
 </div>
 } @else if(isLoggedIn){
-<div class="appointment-container">
+<div class="appointment-container" style="margin-bottom: 70px">
   <!--Controls for opening the add-event-dialog-->
   <mat-card appearance="outlined" class="center">
     <mat-card-header class="center-content">
@@ -35,13 +35,51 @@
     </mat-card-header>
     <mat-card-content class="center-content">
 
-      <br />
-      <br />
-
       <button mat-fab extended color="primary" (click)="openDialog()">
         <mat-icon fontSet="material-icons">edit_calendar</mat-icon>
         {{'admin.addEvent' | translate}}
       </button>
+
+      <br>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+
+      <!--List all existing events-->
+      <table mat-table [dataSource]="calendarEvents" style="background-color: var(--mat-app-background-color)">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef="">ID</th>
+          <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef="">{{'add-event-dialog.title' | translate}}</th>
+          <td mat-cell *matCellDef="let element">{{element.title}}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef="">{{'add-event-dialog.description' | translate}}</th>
+          <td mat-cell *matCellDef="let element">{{element.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef="">{{'add-event-dialog.startDate' | translate}}</th>
+          <td mat-cell *matCellDef="let element">{{element.start}}</td>
+        </ng-container>
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef="">{{'add-event-dialog.endDate' | translate}}</th>
+          <td mat-cell *matCellDef="let element">{{element.end}}</td>
+        </ng-container>
+        <!--Clickable delete button for deleting event from the database-->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef=""></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab (click)="deleteEvent(element.id)" [disabled]="deleteDisabled" color="primary">
+              <mat-icon fontSet="material-icons-rounded" style="cursor: pointer;">delete_forever</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </mat-card-content>
   </mat-card>
 </div>

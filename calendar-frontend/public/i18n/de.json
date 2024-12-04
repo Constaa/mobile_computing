@@ -49,6 +49,7 @@
     },
     "service": {
         "addEventSuccess": "Termin erfolgreich hinzugefügt",
+        "deleteEventSuccess": "Termin erfolgreich gelöscht",
         "badRequest": "Termindaten sind fehlerhaft"
     }
 }

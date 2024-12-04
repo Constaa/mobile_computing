@@ -13,7 +13,7 @@ import listPlugin from '@fullcalendar/list';
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { Store } from '@ngrx/store';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
 import { CalendarEvent } from '../../shared/models/calendarEvent';
 import * as CalendarActions from '../../shared/store/calendar/calendar.actions';

@@ -49,6 +49,7 @@
     },
     "service": {
         "addEventSuccess": "Event added successfully",
+        "deleteEventSuccess": "Event deleted successfully",
         "badRequest": "Event data is invalid"
     }
 }

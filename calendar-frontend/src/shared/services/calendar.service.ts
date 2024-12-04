@@ -49,6 +49,25 @@ export class CalendarService {
     })).subscribe();
   }
 
+  deleteCalendarEvent(id: number) {
+    return this.httpClient.delete(`${this.apiUrl}/deleteEvent?id=${id}`, { observe: 'response' }).pipe(map(x => {
+      if (x.status == 200) {
+        //Show confirmation notification on successfull execution.
+        this.openSnackbar(this.translate.instant('service.deleteEventSuccess'), "successSnackbar");
+        return;
+      }
+      else if (x.status == 400) {
+        setTimeout(
+          () =>
+            this.openSnackbar(this.translate.instant('service.badRequest'), "errorSnackbar")
+        );
+        return;
+      }
+      this.openSnackbar(x.statusText, "errorSnackbar");
+      return;
+    })).subscribe();
+  }
+
   /**
    * Function for displaying status notifications.
    * @param message The message that should be displayed in the notification
