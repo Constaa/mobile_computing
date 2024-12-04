@@ -15,7 +15,7 @@ You are permitted to use, modify, and distribute this project **exclusively for 
 ## Citation
 If you use this project in your work, please cite it as follows:
 ```
-Marc & Fabian & Jonas Dietsche- Mobile Computing (2024)
+Marc Schepp & Fabian Schelble & Jonas Dietsche- Mobile Computing (2024)
 ```
 
 For any questions or clarifications, please contact:
