@@ -137,35 +137,35 @@ namespace calendar_backend
 
                 //Samples for testing
                 //TODO: Get events from MariaDB
-                list = [
-                    new CalendarEvent() {
-                        Id = 1,
-                        AllDay = false,
-                        Start = DateTime.Now,
-                        End = DateTime.Now.AddHours(3),
-                        Title = "First test event",
-                        Description = "Beschreibung 1",
-                        ClassName ="course"
+                //list = [
+                //    new CalendarEvent() {
+                //        Id = 1,
+                //        AllDay = false,
+                //        Start = DateTime.Now,
+                //        End = DateTime.Now.AddHours(3),
+                //        Title = "First test event",
+                //        Description = "Beschreibung 1",
+                //        ClassName ="course"
 
-                    }, new CalendarEvent() {
-                        Id = 2,
-                        AllDay = true,
-                        Start = DateTime.Now.AddDays(4),
-                        End = DateTime.Now.AddDays(4),
-                        Title = "Second Test event",
-                        Description = "Beschreibung 2",
-                        ClassName = "seminar"
-                    },
-                    new CalendarEvent() {
-                        Id = 3,
-                        AllDay = false,
-                        Start = DateTime.Now.AddDays(4),
-                        End = DateTime.Now.AddDays(6),
-                        Title = "Third Test event",
-                        Description = "Beschreibung 3",
-                        ClassName = "conference"
-                    }
-                ];
+                //    }, new CalendarEvent() {
+                //        Id = 2,
+                //        AllDay = true,
+                //        Start = DateTime.Now.AddDays(4),
+                //        End = DateTime.Now.AddDays(4),
+                //        Title = "Second Test event",
+                //        Description = "Beschreibung 2",
+                //        ClassName = "seminar"
+                //    },
+                //    new CalendarEvent() {
+                //        Id = 3,
+                //        AllDay = false,
+                //        Start = DateTime.Now.AddDays(4),
+                //        End = DateTime.Now.AddDays(6),
+                //        Title = "Third Test event",
+                //        Description = "Beschreibung 3",
+                //        ClassName = "conference"
+                //    }
+                //];
 
                 return TypedResults.Ok(list);
             })
