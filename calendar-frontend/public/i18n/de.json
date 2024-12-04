@@ -32,12 +32,19 @@
         "saturday": "Samstag",
         "sunday": "Sonntag",
         "minParticipants": "Mindestteilnehmerzahl",
-        "maxParticipants": "Maximale Teilnehmerzahl"
+        "maxParticipants": "Maximale Teilnehmerzahl",
+        "course": "Kurs",
+        "conference": "Konferenz",
+        "seminar": "Seminar"
     },
     "calendar": {
         "category": "Kategorie",
         "search": "Suchbegriff eingeben",
-        "searchButton": "Filter anwenden"
+        "searchButton": "Filter anwenden",
+        "course": "Kurs",
+        "conference": "Konferenz",
+        "seminar": "Seminar",
+        "all": "Alle"
     },
     "service": {
         "addEventSuccess": "Termin erfolgreich hinzugefügt",

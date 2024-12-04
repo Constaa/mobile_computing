@@ -239,16 +239,25 @@ body {
   cursor: pointer;
 }
 
-.konferenz {
-  color: 'yellow'
+.conference {
+  background-color: yellow;
+  color: black;
 }
 
-.kurs {
-  color: 'red'
+.conference>.fc-event-main {
+  color: black;
+}
+
+.conference .fc-h-event {
+  color: black;
+}
+
+.course {
+  background-color: red;
 }
 
 .seminar {
-  color: 'green'
+  background-color: green;
 }
 
 .timeDisabled {

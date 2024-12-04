@@ -26,23 +26,23 @@
             <textarea matInput [(ngModel)]="eventDescription" rows="5"></textarea>
         </mat-form-field>
 
-      <br>
+        <br>
 
-    <!--
+        <!--
         Diese Komponente stellt ein Formularfeld zur Auswahl einer Veranstaltungsart bereit.
         Es verwendet Angular Material-Komponenten wie mat-form-field, mat-label und mat-select.
         Die verfügbaren Optionen sind "Kurs", "Seminar" und "Konferenz".
         Die ausgewählte Option wird über das ngModel an die Variable eventClassName gebunden.
         Der Label-Text wird mithilfe des translate-Pipes internationalisiert.
     -->
-      <mat-form-field color="accent">
-        <mat-label>{{'add-event-dialog.className' | translate}}</mat-label>
-        <mat-select [(ngModel)]="eventClassName">
-          <mat-option value="Kurs">Kurs</mat-option>
-          <mat-option value="Seminar">Seminar</mat-option>
-          <mat-option value="Konferenz">Konferenz</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field color="accent">
+            <mat-label>{{'add-event-dialog.className' | translate}}</mat-label>
+            <mat-select [(ngModel)]="eventClassName">
+                <mat-option value="course">{{'add-event-dialog.course' | translate}}</mat-option>
+                <mat-option value="seminar">{{'add-event-dialog.seminar' | translate}}</mat-option>
+                <mat-option value="conference">{{'add-event-dialog.conference' | translate}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <br>
         <mat-divider></mat-divider>

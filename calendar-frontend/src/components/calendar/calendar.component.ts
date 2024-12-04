@@ -46,6 +46,7 @@ export class CalendarComponent implements OnInit {
       center: 'title',
       right: 'dayGridMonth,multiMonthYear,timeGridWeek,timeGridDay,listWeek'
     },
+    contentHeight: "670px"
   };
 
   constructor(private store: Store, private translate: TranslateService) { }
@@ -107,7 +108,7 @@ export class CalendarComponent implements OnInit {
     this.calendarOptions.locale = languageCode;
   }
 
-  
+
   /**
    * Setzt die aktuelle Kategorie basierend auf der Auswahl des Benutzers und wendet die Filter an.
    *

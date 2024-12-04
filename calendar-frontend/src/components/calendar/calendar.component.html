@@ -22,10 +22,15 @@
         <mat-icon matPrefix fontSet="material-icons">filter_alt</mat-icon>
         <mat-label>{{'calendar.category' | translate}}</mat-label>
         <mat-select [ngModel]="currentCategory" (selectionChange)="setCategory($event)">
+            <!--Set translation for initial selection manually as translations aren't loaded yet when the select is loaded.-->
+            @if(calendarOptions.locale == "de"){
             <mat-option value="all" selected>Alle</mat-option>
-            <mat-option value="Kurs">Kurs</mat-option>
-            <mat-option value="Seminar">Seminar</mat-option>
-            <mat-option value="Konferenz">Konferenz</mat-option>
+            } @else if(calendarOptions.locale == "en-gb"){
+            <mat-option value="all" selected>All</mat-option>
+            }
+            <mat-option value="course">{{'calendar.course' | translate}}</mat-option>
+            <mat-option value="seminar">{{'calendar.seminar' | translate}}</mat-option>
+            <mat-option value="conference">{{'calendar.conference' | translate}}</mat-option>
         </mat-select>
     </mat-form-field>
 

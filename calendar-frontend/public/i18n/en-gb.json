@@ -32,12 +32,19 @@
         "saturday": "Saturday",
         "sunday": "Sunday",
         "minParticipants": "Min. Participants",
-        "maxParticipants": "Max. Participants"
+        "maxParticipants": "Max. Participants",
+        "course": "Course",
+        "conference": "Conference",
+        "seminar": "Seminar"
     },
     "calendar": {
         "category": "Category",
         "search": "Enter search term",
-        "searchButton": "Apply filters"
+        "searchButton": "Apply filters",
+        "course": "Course",
+        "conference": "Conference",
+        "seminar": "Seminar",
+        "all": "All"
     },
     "service": {
         "addEventSuccess": "Event added successfully",
