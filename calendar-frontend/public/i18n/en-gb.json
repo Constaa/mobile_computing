@@ -2,7 +2,8 @@
     "header": {
         "calendar": "Calendar",
         "admin": "Admin",
-        "languageSelect": "Language selection"
+        "languageSelect": "Language selection",
+        "menu": "Menu"
     },
     "admin": {
         "username": "User name",

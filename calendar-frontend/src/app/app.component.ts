@@ -5,17 +5,17 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarComponent } from '../components/calendar/calendar.component';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
 import * as CalendarSelectors from '../shared/store/calendar/calendar.selectors';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-root',
-    imports: [RouterOutlet, HeaderComponent, MatButtonModule, MatIconModule],
-    providers: [CalendarComponent],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [RouterOutlet, HeaderComponent, MatButtonModule, MatIconModule],
+  providers: [CalendarComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   title = 'calendar-frontend';
@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
   rootElement: any = null;
   currentLanguage$!: Observable<string>;
   currentLanguage: string = "de";
+  isScreenSizeSmall$!: Observable<boolean>;
+  isScreenSizeSmall: boolean = false;
 
   constructor(public overlayContainer: OverlayContainer, private translate: TranslateService, private store: Store) {
     this.translate.addLangs(['de', 'en-gb']);
@@ -34,7 +36,14 @@ export class AppComponent implements OnInit {
     this.currentLanguage$ = this.store.select(CalendarSelectors.selectCurrentUserLanguage);
     this.currentLanguage$.subscribe(x => {
       this.translate.use(x);
-    })
+    });
+
+    const checkScreenSize = () => document.body.offsetWidth < 1281;
+    const screenSizeChanged$ = fromEvent(window, 'resize').pipe(debounceTime(500), map(checkScreenSize));
+    this.isScreenSizeSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
+    this.isScreenSizeSmall$.subscribe(x => {
+      this.isScreenSizeSmall = x;
+    });
   }
 
   ngAfterContentInit() {

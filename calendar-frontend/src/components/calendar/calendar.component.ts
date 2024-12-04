@@ -7,7 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import deLocale from '@fullcalendar/core/locales/de';
 import enLocale from '@fullcalendar/core/locales/en-gb';
-import { Observable } from 'rxjs';
+import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
 import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { Store } from '@ngrx/store';
 import * as CalendarActions from '../../shared/store/calendar/calendar.actions';
@@ -35,6 +35,9 @@ export class CalendarComponent implements OnInit {
   calendarLanguage!: string;
   currentCategory: string = "all";
   searchQuery: string = '';
+  isScreenSizeSmall$!: Observable<boolean>;
+  isScreenSizeSmall: boolean = false;
+  headerToolbar!: HTMLDivElement;
 
   calendarOptions: CalendarOptions = {
     initialView: 'multiMonthYear',
@@ -97,6 +100,26 @@ export class CalendarComponent implements OnInit {
         alert(`Title: ${info.event.title}\r\nDescription: ${info.event.extendedProps["description"]}\r\nStart: ${info.event.start?.toLocaleString()}\r\nEnd: ${wholeDayEN}\r\nCategory: ${info.event.classNames.join(', ')}\r\nMin. Participants: ${info.event.extendedProps["minParticipants"]}\r\nMax. Participants: ${info.event.extendedProps["maxParticipants"]}`);
       }
     }
+
+    this.headerToolbar = document.getElementsByClassName("fc-header-toolbar")[0] as HTMLDivElement;
+    const checkScreenSize = () => document.body.offsetWidth < 1281;
+    const screenSizeChanged$ = fromEvent(window, 'resize').pipe(debounceTime(500), map(checkScreenSize));
+    this.isScreenSizeSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
+    this.isScreenSizeSmall$.subscribe(x => {
+      this.isScreenSizeSmall = x;
+      if (this.isScreenSizeSmall) {
+        this.calendarOptions.contentHeight = "520px";
+        console.log(this.headerToolbar);
+        if (this.headerToolbar) {
+          this.headerToolbar.classList.add("small-screen-toolbar");
+        }
+      } else {
+        this.calendarOptions.contentHeight = "670px";
+        if (this.headerToolbar) {
+          this.headerToolbar.classList.remove("small-screen-toolbar");
+        }
+      }
+    });
   }
 
   /**

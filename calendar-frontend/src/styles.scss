@@ -170,7 +170,8 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
 
     //There might be some additional classes that need color configurations for dark mode
     .fc-multimonth-daygrid,
-    .fc-list-day-cushion {
+    .fc-list-day-cushion,
+    .fc-multimonth-header {
       background-color: #222222;
     }
 
@@ -282,4 +283,12 @@ body {
 .successSnackbar {
   --mdc-snackbar-container-color: green !important;
   --mdc-snackbar-supporting-text-color: white !important;
+}
+
+.fc-header-toolbar {
+  text-align: center;
+}
+
+.small-screen-toolbar {
+  display: flow !important;
 }

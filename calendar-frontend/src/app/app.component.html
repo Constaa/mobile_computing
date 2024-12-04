@@ -1,4 +1,4 @@
-<body id="root-element" class="mat-app-background" [@themeChange]="darkMode ? true: false">
+<body id="root-element" class="mat-app-background" style="overflow:auto;" [@themeChange]="darkMode ? true: false">
   <div id="app-container">
     <app-header></app-header>
     <br>
@@ -6,7 +6,10 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+
+  @if(!isScreenSizeSmall){
   <button mat-fab style="position: fixed; bottom: 1vh; left: 1vw; z-index: 500;" (click)="openHelp()" color="primary">
     <mat-icon fontSet="material-icons" style="cursor: pointer;">help</mat-icon>
   </button>
+  }
 </body>

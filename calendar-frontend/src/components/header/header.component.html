@@ -1,7 +1,16 @@
 <mat-toolbar id="navbar" class="mat-elevation-z5" color="primary" style="position: fixed; top:0; z-index: 5;">
+    @if(isScreenSizeSmall){
+    <span style="margin-right: 3vw;">
+        <button mat-mini-fab (click)="openTemplateDialog();">
+            <mat-icon fonrSet="material-icons">menu</mat-icon>
+        </button>
+    </span>
+    }
+
     <span style="font-size:large; font-weight: bold;">Calendar App</span>
 
-    <!--TODO: Show / Hide buttons depending on user role-->
+
+    @if(!isScreenSizeSmall){
     <span style="margin-left: 1vw;">
         <button mat-raised-button routerLink="/calendar">{{'header.calendar' | translate}}</button>
     </span>
@@ -33,4 +42,51 @@
             </span>
         </mat-card-content>
     </mat-card>
+    }
 </mat-toolbar>
+
+@if(isScreenSizeSmall){
+<mat-toolbar id="navbar" class="mat-elevation-z5" color="primary"
+    style="position: fixed; bottom: 0; z-index: 5; text-align: center; align-items: center; justify-content: center;">
+    <button mat-mini-fab (click)="openHelp()" color="primary">
+        <mat-icon fontSet="material-icons" style="cursor: pointer;">help</mat-icon>
+    </button>
+    <span style="margin-left: 1vw;">
+        <button mat-raised-button routerLink="/calendar">{{'header.calendar' | translate}}</button>
+    </span>
+    <span style="margin-left: 1vw;">
+        <button mat-raised-button routerLink="/admin">{{'header.admin' | translate}}</button>
+    </span>
+</mat-toolbar>
+}
+
+<ng-template #menuDialog>
+    <div class="mat-app-background dialog-container">
+        <h2>{{'header.menu' | translate}}</h2>
+
+        <mat-dialog-content style="overflow-y: scroll; text-align: center;">
+            <span style="padding-top: 20px">
+                <mat-icon fontSet="material-icons">translate</mat-icon>&nbsp;
+                <mat-form-field color="accent">
+                    <mat-label>{{'header.languageSelect' | translate}}</mat-label>
+                    <mat-select [ngModel]="currentLanguage" (selectionChange)="setCalendarLanguage($event)">
+                        <mat-option value="de" selected>Deutsch</mat-option>
+                        <mat-option value="en-gb">English</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </span>
+
+            <mat-card appearance="outlined" style="width: fit-content; margin: auto">
+                <mat-card-content>
+                    <span style="display: flex; align-items: center;">
+                        <mat-icon fontSet="material-icons" color="warn">light_mode</mat-icon>
+                        <mat-slide-toggle [checked]="darkMode" (change)="darkMode=!darkMode;checkDarkMode()"
+                            style="margin: 0 5px 0 5px;">
+                        </mat-slide-toggle>
+                        <mat-icon fontSet="material-icons" color="warn">dark_mode</mat-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+        </mat-dialog-content>
+    </div>
+</ng-template>
