@@ -37,6 +37,9 @@ export class CalendarService {
       if (x.status == 200) {
         //Show confirmation notification on successfull execution.
         this.openSnackbar(this.translate.instant('service.addEventSuccess'), "successSnackbar");
+        setTimeout(() => {
+          this.store.dispatch(CalendarActions.LoadCalendarEvents());
+        }, 2000);
         return;
       }
       else if (x.status == 400) {
