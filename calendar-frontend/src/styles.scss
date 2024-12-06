@@ -182,7 +182,6 @@ $calendar-frontend-theme-dark: mat.m2-define-dark-theme((color: (primary: $calen
   }
 
   //Changes to the calendar appearance
-  //TODO: separate these styles into a separate file (dark mode adjustments needed?)
   & {
     --fc-button-bg-color: #034875;
     --fc-button-border-color: rgba(255, 255, 255, 0.12);
