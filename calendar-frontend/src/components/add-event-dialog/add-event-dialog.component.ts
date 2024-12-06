@@ -154,7 +154,8 @@ export class AddEventDialogComponent implements OnInit {
       return;
     }
 
-    if (this.eventMinParticipants > this.eventMaxParticipants) {
+    //Parsing to string and then back to int is needed to get the correct result
+    if (parseInt(this.eventMinParticipants.toString()) > parseInt(this.eventMaxParticipants.toString())) {
       this.formValid = false;
       this.currentValidationError = this.translate.instant('add-event-dialog.participantValidation');
       return;
