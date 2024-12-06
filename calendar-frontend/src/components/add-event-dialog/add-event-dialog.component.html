@@ -91,7 +91,8 @@
             <!--Input field for entering the start date of the to-be-created event. The input is connected to the variable defined in the [(ngModel)] directive.-->
             <mat-form-field color="accent">
                 <mat-label>{{'add-event-dialog.startDate' | translate}}</mat-label>
-                <input matInput [matDatepicker]="datepickerStart" [(ngModel)]="eventStartDate">
+                <input matInput [matDatepicker]="datepickerStart" [(ngModel)]="eventStartDate"
+                    (change)="checkInputValidity();">
                 <mat-datepicker #datepickerStart />
                 <mat-datepicker-toggle [for]="datepickerStart" matSuffix />
             </mat-form-field>
@@ -100,8 +101,8 @@
             <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
                 <mat-label>{{'add-event-dialog.startTime' | translate}}</mat-label>
                 <input matInput [matTimepicker]="timepickerStart" [(ngModel)]="eventStartDate"
-                    [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay"
-                    [class.timeDisabled]="eventWholeDay">
+                    [disabled]="eventWholeDay" [class.timeDisabled]="eventWholeDay"
+                    (ngModelChange)="checkInputValidity()">
                 <mat-timepicker #timepickerStart />
                 <mat-timepicker-toggle [for]="timepickerStart" matSuffix [class.timeDisabled]="eventWholeDay" />
             </mat-form-field>
@@ -114,7 +115,8 @@
             <!--Input field for entering the end date of the to-be-created event. The input is connected to the variable defined in the [(ngModel)] directive.-->
             <mat-form-field color="accent">
                 <mat-label>{{'add-event-dialog.endDate' | translate}}</mat-label>
-                <input matInput [matDatepicker]="datepickerEnd" [(ngModel)]="eventEndDate">
+                <input matInput [matDatepicker]="datepickerEnd" [(ngModel)]="eventEndDate"
+                    (change)="checkInputValidity();">
                 <mat-datepicker #datepickerEnd />
                 <mat-datepicker-toggle [for]="datepickerEnd" matSuffix />
             </mat-form-field>
@@ -122,9 +124,8 @@
             <!--Input field for entering the end time of the to-be-created event. The input is connected to the variable defined in the [(ngModel)] directive.-->
             <mat-form-field color="accent" [class.timeDisabled]="eventWholeDay">
                 <mat-label>{{'add-event-dialog.endTime' | translate}}</mat-label>
-                <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate"
-                    [ngModelOptions]="{updateOn: 'blur'}" [disabled]="eventWholeDay"
-                    [class.timeDisabled]="eventWholeDay">
+                <input matInput [matTimepicker]="timepickerEnd" [(ngModel)]="eventEndDate" [disabled]="eventWholeDay"
+                    [class.timeDisabled]="eventWholeDay" (ngModelChange)="checkInputValidity()">
                 <mat-timepicker #timepickerEnd />
                 <mat-timepicker-toggle [for]="timepickerEnd" matSuffix [class.timeDisabled]="eventWholeDay" />
             </mat-form-field>
@@ -139,7 +140,7 @@
         </button>
 
         <!--Clickable button for executing the function for adding a new event to the database.-->
-        <button mat-fab extended color="warn" (click)="addCalendarEvent();">
+        <button mat-fab extended color="warn" (click)="addCalendarEvent();" [disabled]="!formValid">
             <mat-icon fontSet="material-icons-outlined">calendar_add_on</mat-icon>
             {{'add-event-dialog.addEvent' | translate}}
         </button>

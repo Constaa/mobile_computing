@@ -53,6 +53,8 @@ export class AddEventDialogComponent implements OnInit {
   eventDaysOfWeek: number[] = [];
   eventMinParticipants: number = 0;
   eventMaxParticipants: number = 0;
+  formValid: boolean = false;
+  intervalId: any;
 
   constructor(private calendarService: CalendarService, private store: Store) { }
 
@@ -65,7 +67,15 @@ export class AddEventDialogComponent implements OnInit {
       this.calendarLanguage = x;
       //Use only the first to characters to correctly set the locale for the date and time pickers and handle AM/PM in corresponding locales.
       this._adapter.setLocale(x.substring(0, 2));
-    })
+    });
+
+    /** 
+     * Create an interval that will periodically execute the enclosed functions.
+     * Used to implement the polling system that periodically gets the current available users and messages.
+     */
+    this.intervalId = setInterval(() => {
+      this.checkInputValidity();
+    }, 500);
   }
 
   /**
@@ -110,6 +120,52 @@ export class AddEventDialogComponent implements OnInit {
 
     //Close the dialog.
     this.cancel();
+  }
+
+  checkInputValidity() {
+    if (!this.eventTitle || this.eventTitle == "") {
+      this.formValid = false;
+      console.log("title");
+      return;
+    }
+
+    if (!this.eventDescription || this.eventDescription == "") {
+      this.formValid = false;
+      console.log("description");
+      return;
+    }
+
+    if (!this.eventClassName || this.eventClassName == "") {
+      this.formValid = false;
+      console.log("className");
+      return;
+    }
+
+    if (this.eventMinParticipants < 0 || this.eventMaxParticipants < 0 || this.eventMinParticipants > this.eventMaxParticipants) {
+      this.formValid = false;
+      console.log("participants");
+      return;
+    }
+
+    if (this.eventRecurring && this.eventDaysOfWeek.length == 0) {
+      this.formValid = false;
+      console.log("daysofWeek");
+      return;
+    }
+
+    if (!this.eventStartDate || !this.eventEndDate) {
+      this.formValid = false;
+      console.log("date existance");
+      return;
+    }
+
+    if (!this.eventWholeDay && this.eventStartDate > this.eventEndDate) {
+      this.formValid = false;
+      console.log("start > end");
+      return;
+    }
+
+    this.formValid = true;
   }
 
   /**
