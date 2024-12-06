@@ -132,17 +132,35 @@
         </div>
     </mat-dialog-content>
 
-    <mat-dialog-actions align="center">
-        <!--Clickable button for closing the dialog without saving the new event to the database.-->
-        <button mat-fab extended color="primary" (click)="cancel()">
-            <mat-icon fontSet="material-icons">close</mat-icon>
-            {{'add-event-dialog.cancel' | translate}}
-        </button>
+    <mat-dialog-actions align="center" style="padding: 0;">
+        <table style="border-collapse: separate; border-spacing: 0 1em;">
+            <tr>
+                @if(currentValidationError != "") {
+                <td style="background-color: red; color: white; border-radius: 5px;">
+                    {{currentValidationError}}
+                </td>
+                }@else {
+                <td>
+                    &nbsp;
+                </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <!--Clickable button for closing the dialog without saving the new event to the database.-->
+                    <button mat-fab extended color="primary" (click)="cancel()">
+                        <mat-icon fontSet="material-icons">close</mat-icon>
+                        {{'add-event-dialog.cancel' | translate}}
+                    </button>
 
-        <!--Clickable button for executing the function for adding a new event to the database.-->
-        <button mat-fab extended color="warn" (click)="addCalendarEvent();" [disabled]="!formValid">
-            <mat-icon fontSet="material-icons-outlined">calendar_add_on</mat-icon>
-            {{'add-event-dialog.addEvent' | translate}}
-        </button>
+                    <!--Clickable button for executing the function for adding a new event to the database.-->
+                    <button mat-fab extended color="warn" (click)="addCalendarEvent();" [disabled]="!formValid">
+                        <mat-icon fontSet="material-icons-outlined">calendar_add_on</mat-icon>
+                        {{'add-event-dialog.addEvent' | translate}}
+                    </button>
+                </td>
+            </tr>
+        </table>
+
     </mat-dialog-actions>
 </div>

@@ -36,7 +36,15 @@
         "maxParticipants": "Maximale Teilnehmerzahl",
         "course": "Kurs",
         "conference": "Konferenz",
-        "seminar": "Seminar"
+        "seminar": "Seminar",
+        "titleValidation": "Der Titel des Termins fehlt.",
+        "descriptionValidation": "Die Beschreibung des Termins fehlt.",
+        "classNameValidation": "Die Kategorie des Termins fehlt.",
+        "negativeParticipantsValidation": "Teilnehmeranzahlen dürfen nicht negativ sein.",
+        "participantValidation": "Die Mindestteilnehmerzahl muss kleiner als die maximale Teilnehmerzahl sein.",
+        "recurringValidation": "Bei wiederholenden Terminen müssen Tage angegeben werden.",
+        "dateValidation": "Start- und Enddatum müssen gesetzt sein.",
+        "dateTimeValidation": "Der Startzeitpunkt muss vor dem Endzeitpunkt liegen."
     },
     "calendar": {
         "category": "Kategorie",

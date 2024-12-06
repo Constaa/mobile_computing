@@ -36,7 +36,15 @@
         "maxParticipants": "Max. Participants",
         "course": "Course",
         "conference": "Conference",
-        "seminar": "Seminar"
+        "seminar": "Seminar",
+        "titleValidation": "The title of the event is missing.",
+        "descriptionValidation": "The description of the event is missing.",
+        "classNameValidation": "The category of the event is missing.",
+        "negativeParticipants": "The amount of participants must not be negative.",
+        "participantValidation": "The min. amount of participants must be lower than the max. amount.",
+        "recurringValidation": "Days need to be set for recurring events.",
+        "dateValidation": "Start and end dates need to be set.",
+        "dateTimeValidation": "The start time must be before the end time."
     },
     "calendar": {
         "category": "Category",

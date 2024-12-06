@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { Store } from '@ngrx/store';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { CalendarEvent } from '../../shared/models/calendarEvent';
 import { CalendarService } from '../../shared/services/calendar.service';
@@ -55,8 +55,9 @@ export class AddEventDialogComponent implements OnInit {
   eventMaxParticipants: number = 0;
   formValid: boolean = false;
   intervalId: any;
+  currentValidationError: string = "";
 
-  constructor(private calendarService: CalendarService, private store: Store) { }
+  constructor(private calendarService: CalendarService, private store: Store, private translate: TranslateService) { }
 
   /**
    * Internal Angular function that is called once when the component is being accessed.
@@ -122,49 +123,61 @@ export class AddEventDialogComponent implements OnInit {
     this.cancel();
   }
 
+  /**
+   * Function for checking the validity of the different event input options.
+   * @returns void
+   */
   checkInputValidity() {
     if (!this.eventTitle || this.eventTitle == "") {
       this.formValid = false;
-      console.log("title");
+      this.currentValidationError = this.translate.instant('add-event-dialog.titleValidation');
       return;
     }
 
     if (!this.eventDescription || this.eventDescription == "") {
       this.formValid = false;
-      console.log("description");
+      this.currentValidationError = this.translate.instant('add-event-dialog.descriptionValidation');
       return;
     }
 
     if (!this.eventClassName || this.eventClassName == "") {
       this.formValid = false;
-      console.log("className");
+      this.currentValidationError = this.translate.instant('add-event-dialog.classNameValidation');
       return;
     }
 
-    if (this.eventMinParticipants < 0 || this.eventMaxParticipants < 0 || this.eventMinParticipants > this.eventMaxParticipants) {
+    if (this.eventMinParticipants > this.eventMaxParticipants) {
       this.formValid = false;
-      console.log("participants");
+      this.currentValidationError = this.translate.instant('add-event-dialog.participantValidation');
       return;
     }
+
+    if (this.eventMinParticipants < 0 || this.eventMaxParticipants < 0) {
+      this.formValid = false;
+      this.currentValidationError = this.translate.instant('add-event-dialog.negativeParticipantsValidation');
+      return;
+    }
+
 
     if (this.eventRecurring && this.eventDaysOfWeek.length == 0) {
       this.formValid = false;
-      console.log("daysofWeek");
+      this.currentValidationError = this.translate.instant('add-event-dialog.recurringValidation');
       return;
     }
 
     if (!this.eventStartDate || !this.eventEndDate) {
       this.formValid = false;
-      console.log("date existance");
+      this.currentValidationError = this.translate.instant('add-event-dialog.dateValidation');
       return;
     }
 
     if (!this.eventWholeDay && this.eventStartDate > this.eventEndDate) {
       this.formValid = false;
-      console.log("start > end");
+      this.currentValidationError = this.translate.instant('add-event-dialog.dateTimeValidation');
       return;
     }
 
+    this.currentValidationError = "";
     this.formValid = true;
   }
 
