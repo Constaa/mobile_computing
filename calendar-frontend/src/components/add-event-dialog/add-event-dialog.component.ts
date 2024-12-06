@@ -72,11 +72,19 @@ export class AddEventDialogComponent implements OnInit {
 
     /** 
      * Create an interval that will periodically execute the enclosed functions.
-     * Used to implement the polling system that periodically gets the current available users and messages.
+     * Used to periodically check the validity of the entered data.
      */
     this.intervalId = setInterval(() => {
       this.checkInputValidity();
     }, 500);
+  }
+
+  /**
+   * Internal Angular function that is called on component destruction.
+   * Here the set interval is cleared.
+   */
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 
   /**
