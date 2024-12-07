@@ -54,6 +54,11 @@ export class CalendarService {
     })).subscribe();
   }
 
+  /**
+   * Function for deleting an event from the database via the backend API.
+   * @param id The id of the database entry that should be deleted.
+   * @returns void
+   */
   deleteCalendarEvent(id: number) {
     return this.httpClient.delete(`${this.apiUrl}/deleteEvent?id=${id}`, { observe: 'response' }).pipe(map(x => {
       if (x.status == 200) {
